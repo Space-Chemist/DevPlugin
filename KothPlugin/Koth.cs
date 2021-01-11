@@ -10,6 +10,7 @@ using Torch.API;
 using Nest;
 
 using Sandbox.ModAPI;
+using Torch.API.Managers;
 using Torch.Session;
 using VRage.Game.Entity;
 using VRage.ModAPI;
@@ -19,7 +20,9 @@ namespace KothPlugin
     public class Koth : TorchPluginBase
     {
         private KothPluginControl _control;
+        public string KothScorePath = "";
         public static bool _init;
+        private TorchSessionManager _sessionManager;
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private Persistent<KothPluginConfig> _config;
         public KothPluginConfig Config => _config?.Data;
@@ -94,6 +97,13 @@ namespace KothPlugin
         {
             base.Init(torch);
             this.SetupConfig();
+            _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
+            KothScorePath = Path.Combine(_sessionManager.CurrentSession.Torch.Config.InstancePath, "/Storage/2183079146.sbm_NewKoth/Scores.data");
+            if (!File.Exists(KothScorePath)) {
+                Log.Info("No scores");
+            }
+           
+
             //listener = new HttpListener();
             //listener.Prefixes.Add(url);
             //listener.Start();
@@ -104,6 +114,7 @@ namespace KothPlugin
             //listenTask.Start();
 
         }
+        
 
         private void SetupConfig()
         {
