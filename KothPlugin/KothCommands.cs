@@ -42,6 +42,7 @@ namespace KothPlugin
         public void Score()
         {
             Koth.ScoresFromStorage();
+            this.Context.Respond("command ran function");
         }
     }
 }
