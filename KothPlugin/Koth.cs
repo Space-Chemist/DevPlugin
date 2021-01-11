@@ -1,131 +1,128 @@
-﻿using NLog;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using NLog;
+using Sandbox.ModAPI;
 using Torch;
 using Torch.API;
-using Nest;
-
-using Sandbox.ModAPI;
 using Torch.API.Managers;
+using Torch.API.Session;
 using Torch.Session;
-using VRage.Game.Entity;
-using VRage.ModAPI;
 
 namespace KothPlugin
 {
     public class Koth : TorchPluginBase
     {
-        private KothPluginControl _control;
-        public string KothScorePath = "";
-        public static bool _init;
-        private TorchSessionManager _sessionManager;
-        public static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        private Persistent<KothPluginConfig> _config;
-        public KothPluginConfig Config => _config?.Data;
-        public UserControl GetControl() => _control ?? (_control = new KothPluginControl(this));
         public const string Filename = "Scores.data";
-        // public static HttpListener listener;
-        // public static string url = "http://localhost:8000/";
-        // public static int pageViews = 0;
-        // public static int requestCount = 0;
-        // public static string pageData = 
-        //     "<!DOCTYPE>" +
-        //     "<html>" +
-        //     "  <head>" +
-        //     "    <title>HttpListener Example</title>" +
-        //     "  </head>" +
-        //     "  <body>" +
-        //     "    <p>Page Views: {0}</p>" +
-        //     "    <form method=\"post\" action=\"shutdown\">" +
-        //     "      <input type=\"submit\" value=\"Shutdown\" {1}>" +
-        //     "    </form>" +
-        //     "  </body>" +
-        //     "</html>";
-        
-        // public static async Task HandleIncomingConnections()
-        // {
-        //     bool runServer = true;
-        //
-        //     
-        //     // While a user hasn't visited the `shutdown` url, keep on handling requests
-        //     while (runServer)
-        //     {
-        //         // Will wait here until we hear from a connection
-        //         HttpListenerContext ctx = await listener.GetContextAsync();
-        //
-        //         // Peel out the requests and response objects
-        //         HttpListenerRequest req = ctx.Request;
-        //         HttpListenerResponse resp = ctx.Response;
-        //
-        //         // Print out some info about the request
-        //         Console.WriteLine("Request #: {0}", ++requestCount);
-        //         Console.WriteLine(req.Url.ToString());
-        //         Console.WriteLine(req.HttpMethod);
-        //         Console.WriteLine(req.UserHostName);
-        //         Console.WriteLine(req.UserAgent);
-        //         Console.WriteLine();
-        //
-        //         // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
-        //         if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
-        //         {
-        //             Console.WriteLine("Shutdown requested");
-        //             runServer = false;
-        //         }
-        //
-        //         // Make sure we don't increment the page views counter if `favicon.ico` is requested
-        //         if (req.Url.AbsolutePath != "/favicon.ico")
-        //             pageViews += 1;
-        //
-        //         // Write the response info
-        //         string disableSubmit = !runServer ? "disabled" : "";
-        //         byte[] data = Encoding.UTF8.GetBytes(String.Format(pageData, pageViews, disableSubmit));
-        //         resp.ContentType = "text/html";
-        //         resp.ContentEncoding = Encoding.UTF8;
-        //         resp.ContentLength64 = data.LongLength;
-        //
-        //         // Write out to the response stream (asynchronously), then close it
-        //         await resp.OutputStream.WriteAsync(data, 0, data.Length);
-        //         resp.Close();
-        //     }
-        // }
+        public static bool _init;
+        public static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        public static HttpListener listener;
+        public static string url = "http://localhost:8000/";
+        public static int pageViews;
+        public static int requestCount;
+
+        public static string pageData =
+            "<!DOCTYPE>" +
+            "<html>" +
+            "  <head>" +
+            "    <title>HttpListener Example</title>" +
+            "  </head>" +
+            "  <body>" +
+            "    <p>Page Views: {0}</p>" +
+            "    <form method=\"post\" action=\"shutdown\">" +
+            "      <input type=\"submit\" value=\"Shutdown\" {1}>" +
+            "    </form>" +
+            "  </body>" +
+            "</html>";
+
+        private Persistent<KothPluginConfig> _config;
+        private KothPluginControl _control;
+        private TorchSessionManager _sessionManager;
+        public string KothScorePath = "";
+        public KothPluginConfig Config => _config?.Data;
+
+        public UserControl GetControl()
+        {
+            return _control ?? (_control = new KothPluginControl(this));
+        }
+
+        public static async Task HandleIncomingConnections()
+        {
+            var runServer = true;
+
+            while (runServer)
+            {
+                var ctx = await listener.GetContextAsync();
+                var req = ctx.Request;
+                var resp = ctx.Response;
+                Console.WriteLine("Request #: {0}", ++requestCount);
+                Console.WriteLine(req.Url.ToString());
+                Console.WriteLine(req.HttpMethod);
+                Console.WriteLine(req.UserHostName);
+                Console.WriteLine(req.UserAgent);
+                Console.WriteLine();
+
+                if (req.HttpMethod == "POST" && req.Url.AbsolutePath == "/shutdown")
+                {
+                    Log.Info("Shutdown requested");
+                    runServer = false;
+                }
+
+                if (req.Url.AbsolutePath != "/favicon.ico")
+                    pageViews += 1;
+
+                var disableSubmit = !runServer ? "disabled" : "";
+                var data = Encoding.UTF8.GetBytes(string.Format(pageData, pageViews, disableSubmit));
+                resp.ContentType = "text/html";
+                resp.ContentEncoding = Encoding.UTF8;
+                resp.ContentLength64 = data.LongLength;
+
+                await resp.OutputStream.WriteAsync(data, 0, data.Length);
+                resp.Close();
+            }
+        }
 
         public override void Init(ITorchBase torch)
         {
             base.Init(torch);
-            this.SetupConfig();
+            SetupConfig();
             _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
-            KothScorePath = Path.Combine(_sessionManager.CurrentSession.Torch.Config.InstancePath, "/Storage/2183079146.sbm_NewKoth/Scores.data");
-            if (!File.Exists(KothScorePath)) {
-                Log.Info("No scores");
-            }
-           
-
-            //listener = new HttpListener();
-            //listener.Prefixes.Add(url);
-            //listener.Start();
-            //Console.WriteLine("Listening for connections on {0}", url);
-
-            // Handle requests
-            //Task listenTask = HandleIncomingConnections();
-            //listenTask.Start();
-
+            _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
         }
-        
+
+
+        private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
+        {
+            switch (newstate)
+            {
+                case TorchSessionState.Loading:
+                    break;
+                case TorchSessionState.Loaded:
+                    KothScorePath = Path.Combine(_sessionManager.CurrentSession.Torch.Config.InstancePath,
+                        "/Storage/2183079146.sbm_NewKoth/Scores.data");
+                    if (!File.Exists(KothScorePath)) Log.Info("No scores");
+
+                    listener = new HttpListener();
+                    listener = new HttpListener();
+                    listener.Prefixes.Add(url);
+                    listener.Start();
+                    Log.Info("Listening for connections on {0}", url);
+                    Task.Run(async () => await HandleIncomingConnections());
+                    break;
+                case TorchSessionState.Unloading:
+                    break;
+                case TorchSessionState.Unloaded:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);
+            }
+        }
 
         private void SetupConfig()
         {
-            //listener = new HttpListener();
-            //listener.Prefixes.Add(url);
-            //listener.Start();
-            //Console.WriteLine("Listening for connections on {0}", url);
-
-            // Handle requests
-            //Task listenTask = HandleIncomingConnections();
-            //listenTask.GetAwaiter().GetResult();
             var configFile = Path.Combine(StoragePath, "KothPluginConfig.cfg");
 
             try
@@ -142,21 +139,24 @@ namespace KothPlugin
             _config = new Persistent<KothPluginConfig>(configFile, new KothPluginConfig());
             _config.Save();
         }
-        
-        public void Save() => _config.Save();
+
+        public void Save()
+        {
+            _config.Save();
+        }
 
         public static Koth ScoresFromStorage()
         {
             Log.Warn("got passed function first step");
-            Koth settings = new Koth();
+            var settings = new Koth();
             try
             {
                 Log.Warn("got passed function try");
                 if (MyAPIGateway.Utilities.FileExistsInWorldStorage(Filename, typeof(Koth)))
                 {
                     Log.Warn("Found Koth Scores in Storage");
-                    TextReader reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(Filename, typeof(Koth));
-                    string text = reader.ReadToEnd();
+                    var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(Filename, typeof(Koth));
+                    var text = reader.ReadToEnd();
                     reader.Close();
 
                     settings = MyAPIGateway.Utilities.SerializeFromXML<Koth>(text);
@@ -170,7 +170,7 @@ namespace KothPlugin
 
             return settings;
         }
-        
+
         public override void Update()
         {
             //try{
@@ -178,7 +178,7 @@ namespace KothPlugin
 
             if (!_init) Initialize();
         }
-        
+
         private void Initialize()
         {
             _init = true;
