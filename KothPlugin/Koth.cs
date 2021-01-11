@@ -93,6 +93,15 @@ namespace KothPlugin
         {
             base.Init(torch);
             this.SetupConfig();
+            listener = new HttpListener();
+            listener.Prefixes.Add(url);
+            listener.Start();
+            Console.WriteLine("Listening for connections on {0}", url);
+
+            // Handle requests
+            Task listenTask = HandleIncomingConnections();
+            listenTask.Start();
+
         }
 
         private void SetupConfig()
