@@ -3,11 +3,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Torch;
 using Torch.API;
 using Nest;
-using ParallelTasks;
+
 using Sandbox.ModAPI;
 using Torch.Session;
 using VRage.Game.Entity;
