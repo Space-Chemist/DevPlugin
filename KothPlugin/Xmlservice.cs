@@ -9,52 +9,52 @@ namespace KothPlugin
     [XmlRoot(ElementName = "Session")]
     public class session
     {
-        [XmlElement("worldscores")]
-        public List<WorldScores> Ws { get; set; }
+        [XmlElement("WorldScores")]
+        public List<WorldScores> WorldScores { get; set; }
             
     }
 
     [Serializable()]
-    [XmlRoot(ElementName = "worldscores")]
+    [XmlRoot(ElementName = "WorldScores")]
     public class WorldScores
     {
         [XmlElement] 
-        public List<WorldDescription> wd { get; set; }
+        public List<WorldDescription> WorldDescription { get; set; }
     }
 
     [Serializable()]
-    [XmlRoot(ElementName = "worlddescription")]
+    [XmlRoot(ElementName = "WorldDescription")]
     public class WorldDescription
     {
         [XmlElement]
         public string Name { get; set; }
         [XmlElement]
-        public List<Scores> sc { get; set; }
+        public List<Scores> Scores { get; set; }
     }
 
     [Serializable()]
-    [XmlRoot(ElementName = "scores")]
+    [XmlRoot(ElementName = "Scores")]
     public class Scores
     {
         [XmlElement]
-        public List<ScoreDescription> sd { get; set; }
+        public List<ScoreDescription> ScoreDescriptions { get; set; }
     }
 
     [Serializable()]
-    [XmlRoot(ElementName = "scoredescription")]
+    [XmlRoot(ElementName = "ScoreDescription")]
     public class ScoreDescription
     {
-        [XmlElement]
+        [XmlAttribute("FactionId")]
         public long FactionId { get; set; }
-        [XmlElement]
+        [XmlAttribute("FactionName")]
         public string FactionName { get; set; }
-        [XmlElement]
+        [XmlAttribute("FactionTag")]
         public string FactionTag { get; set; }
-        [XmlElement]
+        [XmlAttribute("Points")]
         public int Points { get; set; }
-        [XmlElement]
+        [XmlAttribute("PlanetId")]
         public string PlanetId { get; set; }
-        [XmlElement]
+        [XmlAttribute("Gridname")]
         public string Gridname { get; set; }
     }
 }
