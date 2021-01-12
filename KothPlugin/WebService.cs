@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SharpDX.Toolkit.Content;
 
 namespace KothPlugin
 {
@@ -126,10 +127,10 @@ namespace KothPlugin
                                 case "GET":
 
                                     var Kothdata = Koth.ScoresFromStorage(); //Koth.ScoresFromStorage();
-                                    
-                                    
-                                    
-                                    var pageData = ""; //NEEDS to be koth.html
+
+
+
+                                    var pageData = File.OpenRead("KothPlugin/koth.html");
 
                                     var data = Encoding.UTF8.GetBytes(pageData.Replace("REPLACEMEYES",
                                         JsonConvert.SerializeObject(Kothdata)));
