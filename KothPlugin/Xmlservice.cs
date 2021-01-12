@@ -37,24 +37,24 @@ namespace KothPlugin
     public class Scores
     {
         [XmlElement]
-        public List<ScoreDescription> ScoreDescriptions { get; set; }
+        public List<ScoreDescription> ScoreDescription { get; set; }
     }
 
     [Serializable()]
     [XmlRoot(ElementName = "ScoreDescription")]
     public class ScoreDescription
     {
-        [XmlAttribute("FactionId")]
+        [XmlElement]
         public long FactionId { get; set; }
-        [XmlAttribute("FactionName")]
+        [XmlElement]
         public string FactionName { get; set; }
-        [XmlAttribute("FactionTag")]
+        [XmlElement]
         public string FactionTag { get; set; }
-        [XmlAttribute("Points")]
+        [XmlElement]
         public int Points { get; set; }
-        [XmlAttribute("PlanetId")]
+        [XmlElement]
         public string PlanetId { get; set; }
-        [XmlAttribute("Gridname")]
+        [XmlElement]
         public string Gridname { get; set; }
     }
 }
