@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 using NLog;
 using Sandbox.ModAPI;
 using Torch;
@@ -101,20 +102,21 @@ namespace KothPlugin
                 case TorchSessionState.Loading:
                     break;
                 case TorchSessionState.Loaded:
-                    KothScorePath = Path.Combine(_sessionManager.CurrentSession.Torch.Config.InstancePath,
-                        "/Storage/2183079146.sbm_NewKoth/Scores.data");
+                    KothScorePath = Path.Combine(_sessionManager.CurrentSession.Torch.Config.InstancePath+_sessionManager.CurrentSession.KeenSession.Name,
+                        "Storage\\2183079146.sbm_NewKoth\\Scores.data");
                     if (!File.Exists(KothScorePath)) Log.Info("No scores");
 
-                    listener = new HttpListener();
                     listener = new HttpListener();
                     listener.Prefixes.Add(url);
                     listener.Start();
                     Log.Info("Listening for connections on {0}", url);
                     Task.Run(async () => await HandleIncomingConnections());
+                    WebService.StartWebServer();
                     break;
                 case TorchSessionState.Unloading:
                     break;
                 case TorchSessionState.Unloaded:
+                    listener.Close();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);
