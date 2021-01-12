@@ -45,10 +45,8 @@ namespace KothPlugin
         private Persistent<KothPluginConfig> _config;
         private KothPluginControl _control;
         private TorchSessionManager _sessionManager;
-        public string KothScorePath = "";
+        public static string KothScorePath = "";
         public KothPluginConfig Config => _config?.Data;
-        [XmlIgnore]
-        private string Scores { get; set; };
 
         public UserControl GetControl()
         {
@@ -155,13 +153,13 @@ namespace KothPlugin
             _config.Save();
         }
         
-        public T ScoresFromStorage<T>() where T : class  
+        public static object ScoresFromStorage() 
         {  
-            System.Xml.Serialization.XmlSerializer ser = new System.Xml.Serialization.XmlSerializer(typeof(T));  
+            var ser = new System.Xml.Serialization.XmlSerializer(typeof(object));  
   
-            using (StreamReader data = new StreamReader(this.KothScorePath))  
+            using (var data = new StreamReader(KothScorePath))  
             {  
-                return (T)ser.Deserialize(data);  
+                return ser.Deserialize(data);  
             }  
         }
 

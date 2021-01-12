@@ -85,7 +85,7 @@ namespace KothPlugin
                                     response.ContentType = "application/json";
                                     
                                     //This is what we want to send back
-                                    var data = Koth.ScoresFromStorage();
+                                    var data = Koth.ScoresFromStorage(); //Koth.ScoresFromStorage();
                                     var responseBody = JsonConvert.SerializeObject(data);
                                     
                                     //Write it to the response stream
