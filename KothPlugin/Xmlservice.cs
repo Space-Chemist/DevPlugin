@@ -37,7 +37,7 @@ namespace KothPlugin
     public class Scores
     {
         [XmlElement]
-        public List<ScoreDescription> ScoreDescriptions { get; set; }
+        public List<ScoreDescription> ScoreDescription { get; set; }
     }
 
     [Serializable()]
