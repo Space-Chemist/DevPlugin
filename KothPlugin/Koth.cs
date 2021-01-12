@@ -4,15 +4,18 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NLog;
 using Sandbox;
 using Sandbox.ModAPI;
+using SharpDX.Toolkit.Content;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Session;
 using Torch.Session;
+using XmlSerializer = RestSharp.Serializers.XmlSerializer;
 
 namespace KothPlugin
 {
@@ -25,7 +28,6 @@ namespace KothPlugin
         public static string url = "http://localhost:8000/";
         public static int pageViews;
         public static int requestCount;
-
         public static string pageData =
             "<!DOCTYPE>" +
             "<html>" +
@@ -45,6 +47,8 @@ namespace KothPlugin
         private TorchSessionManager _sessionManager;
         public string KothScorePath = "";
         public KothPluginConfig Config => _config?.Data;
+        [XmlIgnore]
+        private string Scores { get; set; };
 
         public UserControl GetControl()
         {
@@ -150,32 +154,48 @@ namespace KothPlugin
         {
             _config.Save();
         }
-
-        public static Koth ScoresFromStorage()
-        {
-            Log.Warn("got passed function first step");
-            var settings = new Koth();
-            try
-            {
-                Log.Warn("got passed function try");
-                if (MyAPIGateway.Utilities.FileExistsInWorldStorage(Filename, typeof(Koth)))
-                {
-                    Log.Warn("Found Koth Scores in Storage");
-                    var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(Filename, typeof(Koth));
-                    var text = reader.ReadToEnd();
-                    reader.Close();
-
-                    settings = MyAPIGateway.Utilities.SerializeFromXML<Koth>(text);
-                    Log.Info(text.ToString);
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Warn("Failed to recover Koth Scores from storage");
-            }
-
-            return settings;
+        
+        public T ScoresFromStorage<T>() where T : class  
+        {  
+            System.Xml.Serialization.XmlSerializer ser = new System.Xml.Serialization.XmlSerializer(typeof(T));  
+  
+            using (StreamReader data = new StreamReader(this.KothScorePath))  
+            {  
+                return (T)ser.Deserialize(data);  
+            }  
         }
+
+        // public static Scores ScoresFromStorage(string KothScorePath)
+        // {
+        //     Log.Warn("got passed function first step");
+        //     try
+        //     {
+        //         var ser = new XmlSerializer(typeof(Scores));
+        //         using (var f = File.OpenRead(KothScorePath))
+        //         {
+        //             var data = (Koth) ser.Serialize(f);
+        //             
+        //             return data;
+        //         }
+        //         // Log.Warn("got passed function try");
+        //         // if (MyAPIGateway.Utilities.FileExistsInWorldStorage(Filename, typeof(Koth)))
+        //         // {
+        //         //     Log.Warn("Found Koth Scores in Storage");
+        //         //     var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(Filename, typeof(Koth));
+        //         //     var text = reader.ReadToEnd();
+        //         //     reader.Close();
+        //         //
+        //         //     settings = MyAPIGateway.Utilities.SerializeFromXML<Koth>(text);
+        //         //     Log.Info(text.ToString);
+        //         // }
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         Log.Warn("Failed to recover Koth Scores from storage");
+        //     }
+        //
+        //     return null;
+        // }
 
         public override void Update()
         {
@@ -199,4 +219,5 @@ namespace KothPlugin
             Communication.UnregisterHandlers();
         }
     }
+
 }

@@ -37,12 +37,12 @@ namespace KothPlugin
             this.Context.Respond("Koth plugin reset koth scores");
         }
 
-        [Command("score", "output scores", null)]
-        [Permission(MyPromoteLevel.Admin)]
-        public void Score()
-        {
-            Koth.ScoresFromStorage();
-            this.Context.Respond("command ran function");
-        }
+        // [Command("score", "output scores", null)]
+        // [Permission(MyPromoteLevel.Admin)]
+        // public void Score()
+        // {
+        //     Koth.ScoresFromStorage();
+        //     this.Context.Respond("command ran function");
+        // }
     }
 }
