@@ -19,6 +19,8 @@ using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Session;
 using Torch.Session;
+using Discord;
+using Discord.Webhook;
 using XmlSerializer = RestSharp.Serializers.XmlSerializer;
 
 namespace KothPlugin
@@ -119,6 +121,7 @@ namespace KothPlugin
                     listener.Start();
                     Log.Info("Listening for connections on {0}", url);
                     Task.Run(async () => await HandleIncomingConnections());
+                    Task.Run(async () => await SendWebHook("Testy", "Testy test"));
                     WebService.StartWebServer();
                     break;
                 case TorchSessionState.Unloading:
@@ -166,6 +169,21 @@ namespace KothPlugin
                 return (session)ser.Deserialize(sr);  
             }  
         }  
+        
+        
+        public async Task SendWebHook(string title, string msg)
+        {
+            using (var client = new DiscordWebhookClient(""))
+            {
+                var embed = new EmbedBuilder
+                {
+                    Title = title,
+                    Description = msg
+                };
+                await client.SendMessageAsync(text: "", embeds: new[] { embed.Build() });
+            }
+        }
+        
         
         // public static Scores ScoresFromStorage(string KothScorePath)
         // {
