@@ -117,7 +117,7 @@ namespace KothPlugin
                     listener.Start();
                     Log.Info("Listening for connections on {0}", url);
                     Task.Run(async () => await HandleIncomingConnections());
-                    SendWebHook("Testy", "Testy test").RunSynchronously();
+                    SendWebHook("Testy", "Testy test");
                     WebService.StartWebServer();
                     break;
                 case TorchSessionState.Unloading:
@@ -167,7 +167,7 @@ namespace KothPlugin
         }
 
 
-        public async Task SendWebHook(string title, string msg)
+        public void SendWebHook(string title, string msg)
         {
             using (var client = new DiscordWebhookClient(""))
             {
@@ -176,7 +176,7 @@ namespace KothPlugin
                     Title = title,
                     Description = msg
                 };
-                await client.SendMessageAsync(msg, embeds: new[] {embed.Build()});
+                client.SendMessageAsync(msg, embeds: new[] {embed.Build()}).Start();
             }
         }
         
