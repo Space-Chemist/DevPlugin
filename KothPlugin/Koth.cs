@@ -153,14 +153,9 @@ namespace KothPlugin
             _config.Save();
         }
         
-        public static object ScoresFromStorage() 
-        {  
-            var ser = new System.Xml.Serialization.XmlSerializer(typeof(object));  
-  
-            using (var data = new StreamReader(KothScorePath))  
-            {  
-                return ser.Deserialize(data);  
-            }  
+        public static string ScoresFromStorage()
+        {
+            return File.ReadAllText(KothScorePath);
         }
 
         // public static Scores ScoresFromStorage(string KothScorePath)
