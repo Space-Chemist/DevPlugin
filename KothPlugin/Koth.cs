@@ -117,7 +117,7 @@ namespace KothPlugin
                     listener.Start();
                     Log.Info("Listening for connections on {0}", url);
                     Task.Run(async () => await HandleIncomingConnections());
-                    Task.Run(async () => await SendWebHook("Testy", "Testy test"));
+                    SendWebHook("Testy", "Testy test").RunSynchronously();
                     WebService.StartWebServer();
                     break;
                 case TorchSessionState.Unloading:
@@ -176,7 +176,7 @@ namespace KothPlugin
                     Title = title,
                     Description = msg
                 };
-                await client.SendMessageAsync("", embeds: new[] {embed.Build()});
+                await client.SendMessageAsync(msg, embeds: new[] {embed.Build()});
             }
         }
         
