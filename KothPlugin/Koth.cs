@@ -154,11 +154,11 @@ namespace KothPlugin
             _config.Save();
         }
         
-        public static XmlDocument ScoresFromStorage()
+        public static string ScoresFromStorage()
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(KothScorePath);
-            return doc;
+            return doc.InnerXml;
         }
         
         // public static Scores ScoresFromStorage(string KothScorePath)
