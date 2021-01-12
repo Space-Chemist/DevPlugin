@@ -224,5 +224,8 @@
     </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="koth.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

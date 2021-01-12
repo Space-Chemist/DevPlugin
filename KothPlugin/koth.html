@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+<head>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>KOTH score Tracker</title>
+    <link href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css" rel="stylesheet">
+
+</head>
+
+<body layout="column">
+
+<md-toolbar class="md-whiteframe-1dp">
+    <div class="md-toolbar-tools">
+        <div class="md-title">KOTH score Tracker</div>
+    </div>
+</md-toolbar>
+
+<md-content flex laout="column" ng-controller="scoreController">
+
+    <md-card>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>KOTH</span>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-click="loadStuff()">
+                    <md-icon>refresh</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>{{ selected.length }} {{ selected.length > 1 ? 'items' : 'item'}} selected</span>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-progress="promise" md-row-select="options.rowSelection" md-table
+                   multiple="{{ options.multiSelect }}" ng-model="selected">
+                <thead md-head md-on-reorder="logOrder" md-order="query.order" ng-if="!options.decapitate">
+                <tr md-row>
+                    <th md-column md-order-by="Planet"><span>Planet</span></th>
+                    <th md-column md-desc md-numeric md-order-by="FactionName"><span>Faction</span></th>
+                    <th md-column md-numeric md-order-by="FactionTag"><span>Tag</span></th>
+                    <th md-column md-numeric md-order-by="Points"><span>Points</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-auto-select="options.autoSelect" md-on-select="logItem" md-row md-select="score"
+                    ng-disabled="score.FactionName > 400"
+                    ng-repeat="score in scores.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>
+                        {{ score.PlanetId }}
+                    </td>
+                    <td md-cell>{{ score.FactionName }}</td>
+                    <td md-cell>{{ score.FactionTag }}</td>
+                    <td md-cell>{{ score.Points }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-boundary-links="options.boundaryLinks" md-limit="query.limit"
+                             md-limit-options="limitOptions" md-on-paginate="logPagination" md-page="query.page"
+                             md-page-select="options.pageSelect" md-total="{{ scores.count }}"></md-table-pagination>
+    </md-card>
+</md-content>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
+<script>
+    angular.module('demoApp', ['ngMaterial', 'md.data.table'])
+
+        .config(['$mdThemingProvider', function ($mdThemingProvider) {
+            'use strict';
+
+            $mdThemingProvider.theme('default')
+                .primaryPalette('deep-purple');
+        }])
+
+        .controller('scoreController', ['$mdEditDialog', '$q', '$scope', '$http', '$timeout', function ($mdEditDialog, $q, $scope, $http, $timeout) {
+            'use strict';
+
+            $scope.yes = REPLACEMEYES
+
+            $scope.data = []
+            $scope.yes.WorldScores.map(m => m.WorldDescription).forEach(function (e) {
+                    e.map(d => d.Scores).forEach(function(l){
+                        $scope.data.push(l.map(dd=> dd.ScoreDescription))
+                    })
+                }
+            )
+            $scope.data = $scope.data.map(m=>m[0])
+            $scope.scores = {
+                "count": $scope.yes.WorldScores.length,
+                "data": $scope.data[0]
+            };
+
+            console.log($scope.data)
+            $scope.selected = [];
+            $scope.limitOptions = [5, 10, 15];
+
+            $scope.options = {
+                rowSelection: false,
+                multiSelect: false,
+                autoSelect: false,
+                decapitate: false,
+                largeEditDialog: false,
+                boundaryLinks: false,
+                limitSelect: true,
+                pageSelect: true
+            };
+
+            $scope.query = {
+                order: 'score',
+                limit: 5,
+                page: 1
+            };
+
+        }]);
+</script>
+</body>
+</html>
