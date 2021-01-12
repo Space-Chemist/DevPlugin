@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Serialization;
+using KothPlugin;
 using Newtonsoft.Json;
 using NLog;
 using ProtoBuf;
@@ -154,19 +155,17 @@ namespace KothPlugin
         {
             _config.Save();
         }
+
         
-        public static string ScoresFromStorage()
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(session).ToString());
-            session Session;
-            using (XmlReader reader = XmlReader.Create(KothScorePath))
-            {
-                Session = (session) ser.Deserialize(reader);
-            }
-            XmlDocument doc = new XmlDocument();
-            doc.Load(KothScorePath);
-            return doc.InnerXml;
-        }
+        public static session ScoresFromStorage()
+        {  
+            var ser = new System.Xml.Serialization.XmlSerializer(typeof(session));  
+  
+            using (var sr = new StreamReader(KothScorePath))  
+            {  
+                return (session)ser.Deserialize(sr);  
+            }  
+        }  
         
         // public static Scores ScoresFromStorage(string KothScorePath)
         // {
