@@ -157,7 +157,12 @@ namespace KothPlugin
         
         public static string ScoresFromStorage()
         {
-            
+            XmlSerializer ser = new XmlSerializer(typeof(session).ToString());
+            session Session;
+            using (XmlReader reader = XmlReader.Create(KothScorePath))
+            {
+                Session = (session) ser.Deserialize(reader);
+            }
             XmlDocument doc = new XmlDocument();
             doc.Load(KothScorePath);
             return doc.InnerXml;
