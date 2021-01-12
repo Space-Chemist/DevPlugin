@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Newtonsoft.Json;
 using NLog;
+using Sandbox;
 using Sandbox.ModAPI;
 using Torch;
 using Torch.API;
@@ -102,10 +103,13 @@ namespace KothPlugin
                 case TorchSessionState.Loading:
                     break;
                 case TorchSessionState.Loaded:
-                    KothScorePath = Path.Combine(_sessionManager.CurrentSession.Torch.Config.InstancePath+_sessionManager.CurrentSession.KeenSession.Name,
-                        "Storage\\2183079146.sbm_NewKoth\\Scores.data");
+                    var KothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
+                    KothScorePath = Path.Combine(KothScoreName,
+                        $@"Storage\2002161364.sbm_NewKoth\Scores.data");
+                    Log.Warn(KothScorePath.ToString);
                     if (!File.Exists(KothScorePath)) Log.Info("No scores");
 
+                    listener = new HttpListener();
                     listener = new HttpListener();
                     listener.Prefixes.Add(url);
                     listener.Start();
