@@ -167,16 +167,16 @@ namespace KothPlugin
         }
 
 
-        public void SendWebHook(string title, string msg)
+        public async void SendWebHook(string title, string msg)
         {
-            using (var client = new DiscordWebhookClient(""))
+            using (var client = new DiscordWebhookClient("https://discord.com/api/webhooks/798452252070248468/VaNjf14sCkPLOoAr4hZtZRLf8qDThkIEoatAMGdPTlhnZI802t2PAoi9zV1g5WVxGvPi"))
             {
                 var embed = new EmbedBuilder
                 {
                     Title = title,
                     Description = msg
                 };
-                client.SendMessageAsync(msg, embeds: new[] {embed.Build()}).Start();
+                await client.SendMessageAsync(msg, embeds: new[] {embed.Build()});
             }
         }
         
