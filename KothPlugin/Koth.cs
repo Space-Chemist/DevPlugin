@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NLog;
@@ -155,9 +156,11 @@ namespace KothPlugin
         
         public static string ScoresFromStorage()
         {
-            return File.ReadAllText(KothScorePath);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(KothScorePath);
+            return doc.InnerXml;
         }
-
+        
         // public static Scores ScoresFromStorage(string KothScorePath)
         // {
         //     Log.Warn("got passed function first step");
