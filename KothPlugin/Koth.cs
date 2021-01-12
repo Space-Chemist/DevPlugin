@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Xml;
 using System.Xml.Serialization;
-using KothPlugin;
-using Newtonsoft.Json;
+using Discord;
+using Discord.Webhook;
 using NLog;
-using ProtoBuf;
 using Sandbox;
 using Sandbox.ModAPI;
-using SharpDX.Toolkit.Content;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Session;
 using Torch.Session;
-using Discord;
-using Discord.Webhook;
-using XmlSerializer = RestSharp.Serializers.XmlSerializer;
 
 namespace KothPlugin
 {
@@ -34,6 +27,7 @@ namespace KothPlugin
         public static string url = "http://localhost:8000/";
         public static int pageViews;
         public static int requestCount;
+
         public static string pageData =
             "<!DOCTYPE>" +
             "<html>" +
@@ -48,11 +42,13 @@ namespace KothPlugin
             "  </body>" +
             "</html>";
 
+        public static string KothScorePath = "";
+
         private Persistent<KothPluginConfig> _config;
         private KothPluginControl _control;
         private TorchSessionManager _sessionManager;
-        public static string KothScorePath = "";
         public KothPluginConfig Config => _config?.Data;
+
         public UserControl GetControl()
         {
             return _control ?? (_control = new KothPluginControl(this));
@@ -112,7 +108,7 @@ namespace KothPlugin
                 case TorchSessionState.Loaded:
                     var KothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
                     KothScorePath = Path.Combine(KothScoreName,
-                        $@"Storage\2002161364.sbm_NewKoth\Scores.data");
+                        @"Storage\2002161364.sbm_NewKoth\Scores.data");
                     Log.Warn(KothScorePath.ToString);
                     if (!File.Exists(KothScorePath)) Log.Info("No scores");
 
@@ -159,18 +155,18 @@ namespace KothPlugin
             _config.Save();
         }
 
-        
+
         public static session ScoresFromStorage()
-        {  
-            var ser = new System.Xml.Serialization.XmlSerializer(typeof(session));  
-  
-            using (var sr = new StreamReader(KothScorePath))  
-            {  
-                return (session)ser.Deserialize(sr);  
-            }  
-        }  
-        
-        
+        {
+            var ser = new XmlSerializer(typeof(session));
+
+            using (var sr = new StreamReader(KothScorePath))
+            {
+                return (session) ser.Deserialize(sr);
+            }
+        }
+
+
         public async Task SendWebHook(string title, string msg)
         {
             using (var client = new DiscordWebhookClient(""))
@@ -180,42 +176,10 @@ namespace KothPlugin
                     Title = title,
                     Description = msg
                 };
-                await client.SendMessageAsync(text: "", embeds: new[] { embed.Build() });
+                await client.SendMessageAsync("", embeds: new[] {embed.Build()});
             }
         }
         
-        
-        // public static Scores ScoresFromStorage(string KothScorePath)
-        // {
-        //     Log.Warn("got passed function first step");
-        //     try
-        //     {
-        //         var ser = new XmlSerializer(typeof(Scores));
-        //         using (var f = File.OpenRead(KothScorePath))
-        //         {
-        //             var data = (Koth) ser.Serialize(f);
-        //             
-        //             return data;
-        //         }
-        //         // Log.Warn("got passed function try");
-        //         // if (MyAPIGateway.Utilities.FileExistsInWorldStorage(Filename, typeof(Koth)))
-        //         // {
-        //         //     Log.Warn("Found Koth Scores in Storage");
-        //         //     var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(Filename, typeof(Koth));
-        //         //     var text = reader.ReadToEnd();
-        //         //     reader.Close();
-        //         //
-        //         //     settings = MyAPIGateway.Utilities.SerializeFromXML<Koth>(text);
-        //         //     Log.Info(text.ToString);
-        //         // }
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         Log.Warn("Failed to recover Koth Scores from storage");
-        //     }
-        //
-        //     return null;
-        // }
 
         public override void Update()
         {
@@ -239,5 +203,4 @@ namespace KothPlugin
             Communication.UnregisterHandlers();
         }
     }
-
 }
