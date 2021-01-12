@@ -110,7 +110,6 @@ namespace KothPlugin
                     if (!File.Exists(KothScorePath)) Log.Info("No scores");
 
                     listener = new HttpListener();
-                    listener = new HttpListener();
                     listener.Prefixes.Add(url);
                     listener.Start();
                     Log.Info("Listening for connections on {0}", url);
@@ -121,6 +120,7 @@ namespace KothPlugin
                     break;
                 case TorchSessionState.Unloaded:
                     listener.Close();
+                    WebService.StopWebServer();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);
