@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NLog;
+using ProtoBuf;
 using Sandbox;
 using Sandbox.ModAPI;
 using SharpDX.Toolkit.Content;
@@ -48,7 +50,6 @@ namespace KothPlugin
         private TorchSessionManager _sessionManager;
         public static string KothScorePath = "";
         public KothPluginConfig Config => _config?.Data;
-
         public UserControl GetControl()
         {
             return _control ?? (_control = new KothPluginControl(this));
@@ -156,6 +157,7 @@ namespace KothPlugin
         
         public static string ScoresFromStorage()
         {
+            
             XmlDocument doc = new XmlDocument();
             doc.Load(KothScorePath);
             return doc.InnerXml;
