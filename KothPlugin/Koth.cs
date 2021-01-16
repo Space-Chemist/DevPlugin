@@ -31,12 +31,12 @@ namespace KothPlugin
 
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        //public const string Keyword = "/koth";
-        //public const string DisplayName = "KotH";
-        //public const ushort ComId = 42511;
-        //public static bool IsInitilaized = false;
-        //public string BotMessage = "";
-        //private Network Network => Network.Instance;
+        public const string Keyword = "/koth";
+        public const string DisplayName = "KotH";
+        public const ushort ComId = 42511;
+        public static bool IsInitilaized = false;
+        public string BotMessage = "";
+        private Network Network => Network.Instance;
         public static string KothScorePath = "";
 
         private Persistent<KothPluginConfig> _config;
@@ -58,10 +58,10 @@ namespace KothPlugin
             if (!File.Exists(KothScorePath)) Log.Error("KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL");
             _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
-            //SetupNetwork();
+            SetupNetwork();
         }
 
-        /*private void SetupNetwork()
+        private void SetupNetwork()
         {
             if (!IsInitilaized)
             {
@@ -81,7 +81,7 @@ namespace KothPlugin
                 Network.RegisterNetworkCommand("BotMessage", ServerCallback_BotMessage);
                 IsInitilaized = true;
             }
-        }*/
+        }
 
 
         private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
@@ -151,18 +151,18 @@ namespace KothPlugin
             }
         }
 
-        //private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)
-        //{
-        // Clearscore();
-        //}
+        private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)
+        {
+            // Clearscore();
+        }
 
-        /*public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
+        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
         {
             BotMessage = ASCIIEncoding.ASCII.GetString(data);
-            SendWebHook("FuckReload", BotMessage);
+            SendDiscordWebHook("FuckReload", BotMessage);
 
             //MyVisualScriptLogicProvider.SendChatMessage("servercallback update");
-        }*/
+        }
 
 
         public override void Update()

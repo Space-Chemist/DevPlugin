@@ -3,7 +3,7 @@ using Sandbox.ModAPI;
 
 namespace KothPlugin.ModNetworkAPI
 {
-    /*public class Client : Network
+    public class Client : Network
     {
         /// <summary>
         /// Handles communication with the server
@@ -34,5 +34,5 @@ namespace KothPlugin.ModNetworkAPI
                 Log.Warn($"[NetworkAPI] ComID:{ComId} | Failed to send command. Session does not exist.");
             }
         }
-    }*/
+    }
 }

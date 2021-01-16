@@ -6,7 +6,7 @@ using Vector3D = System.Windows.Media.Media3D.Vector3D;
 
 namespace KothPlugin.ModNetworkAPI
 {
-    /*public class Server : Network
+    public class Server : Network
     {
         /// <summary>
         /// Server class contains a few server only feature beond what is inharited from the NetworkAPI
@@ -103,5 +103,5 @@ namespace KothPlugin.ModNetworkAPI
                 MyAPIGateway.Multiplayer.SendMessageTo(ComId, packet, steamId, isReliable);
             }
         }
-    }*/
+    }
 }
