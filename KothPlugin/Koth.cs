@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -11,12 +13,15 @@ using KothPlugin.ModNetworkAPI;
 using Nest;
 using NLog;
 using Sandbox;
+using Sandbox.Game.World;
 using Sandbox.ModAPI;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Session;
+using Torch.Managers.PatchManager;
 using Torch.Session;
+using VRage.Game;
 
 namespace KothPlugin
 {
@@ -29,12 +34,12 @@ namespace KothPlugin
         public static string url = "http://localhost:8000/";
         public static int pageViews;
         public static int requestCount;
-        public const string Keyword = "/koth";
-        public const string DisplayName = "KotH";
-        public const ushort ComId = 42511;
-        public static bool IsInitilaized = false;
-        public string BotMessage = "";
-        private Network Network => Network.Instance;
+        //public const string Keyword = "/koth";
+        //public const string DisplayName = "KotH";
+        //public const ushort ComId = 42511;
+        //public static bool IsInitilaized = false;
+        //public string BotMessage = "";
+        //private Network Network => Network.Instance;
 
         public static string pageData =
             "<!DOCTYPE>" +
@@ -104,10 +109,10 @@ namespace KothPlugin
             SetupConfig();
             _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
-            SetupNetwork();
+            //SetupNetwork();
         }
 
-        private void SetupNetwork()
+        /*private void SetupNetwork()
         {
             if (!IsInitilaized)
             {
@@ -127,12 +132,44 @@ namespace KothPlugin
                 Network.RegisterNetworkCommand("BotMessage", ServerCallback_BotMessage);
                 IsInitilaized = true;
             }
+        }*/
+        
+        [PatchShim]
+        public static class MyModAdditionPatch {
+
+            public static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
+            internal static readonly MethodInfo update =
+                typeof(MySession).GetMethod("GetWorld", BindingFlags.Instance | BindingFlags.Public) ??
+                throw new Exception("Failed to find MySession.GetWorld method to patch");
+
+            internal static readonly MethodInfo updatePatch =
+                typeof(MyModAdditionPatch).GetMethod(nameof(SuffixGetWorld), BindingFlags.Static | BindingFlags.Public) ??
+                throw new Exception("Failed to find patch method");
+
+            public static void Patch(PatchContext ctx) {
+
+                try {
+
+                    ctx.GetPattern(update).Suffixes.Add(updatePatch);
+
+                    Log.Info("Patching Successful MySessionPatch!");
+
+                } catch (Exception e) {
+                    Log.Error(e, "Patching failed!");
+                }
+            }
+
+            public static void SuffixGetWorld(ref MyObjectBuilder_World __result) {
+                __result.Checkpoint.Mods = __result.Checkpoint.Mods.ToList();
+                __result.Checkpoint.Mods.Add(new MyObjectBuilder_Checkpoint.ModItem(2183079146));
+            }
         }
 
-        public void Wiped()
+        /*public void Wiped()
         {
             Network.SendCommand("wiped");
-        }
+        }*/
 
         private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
         {
@@ -214,18 +251,18 @@ namespace KothPlugin
             }
         }
         
-        private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)
-        {
+        //private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)
+        //{
            // Clearscore();
-        }
+        //}
         
-        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
+        /*public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
         {
             BotMessage = ASCIIEncoding.ASCII.GetString(data);
             SendWebHook("FuckReload", BotMessage);
 
             //MyVisualScriptLogicProvider.SendChatMessage("servercallback update");
-        }
+        }*/
         
 
         public override void Update()
@@ -244,7 +281,7 @@ namespace KothPlugin
 
         public override void Dispose()
         {
-            Network.Dispose();
+            //Network.Dispose();
 
         }
     }

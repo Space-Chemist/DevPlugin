@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NLog.Fluent;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Utils;
 
 namespace KothPlugin.ModNetworkAPI
 {
-   public enum NetworkTypes { Dedicated, Server, Client }
+   /*public enum NetworkTypes { Dedicated, Server, Client }
 
     public abstract class Network
     {
@@ -57,11 +58,11 @@ namespace KothPlugin.ModNetworkAPI
             /*if (UsingTextCommands)
             {
                 MyAPIGateway.Utilities.MessageEntered += HandleChatInput;
-            }*/
+            }#1#
 
             MyAPIGateway.Multiplayer.RegisterMessageHandler(ComId, HandleIncomingPacket);
 
-            MyLog.Default.Info($"[NetworkAPI] Initialized. ComId: {ComId} Name: {ModName} Keyword: {Keyword}");
+            Log.Info($"[NetworkAPI] Initialized. ComId: {ComId} Name: {ModName} Keyword: {Keyword}");
         }
         
         /*public enum MessageType : byte
@@ -157,7 +158,7 @@ namespace KothPlugin.ModNetworkAPI
             newData[1] = (byte)type;
             data.CopyTo(newData, 1);
             MyAPIGateway.Utilities.InvokeOnGameThread(() => { MyAPIGateway.Multiplayer.SendMessageToServer(ComId, newData); });
-        }*/
+        }#1#
 
         /// <summary>
         /// Invokes chat command events
@@ -358,5 +359,5 @@ namespace KothPlugin.ModNetworkAPI
             
             return NetworkTypes.Server;
         }
-    }
+    }*/
 }

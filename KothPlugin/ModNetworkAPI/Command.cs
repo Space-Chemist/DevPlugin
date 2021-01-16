@@ -2,7 +2,7 @@
 
 namespace KothPlugin.ModNetworkAPI
 {
-    [ProtoContract]
+    /**/[ProtoContract]
     internal class Command
     {
         [ProtoMember(1)]
