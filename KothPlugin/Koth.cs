@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Xml.Serialization;
 using Discord;
 using Discord.Webhook;
+using KothPlugin.ModNetworkAPI;
+using Nest;
 using NLog;
 using Sandbox;
 using Sandbox.ModAPI;
@@ -27,6 +29,12 @@ namespace KothPlugin
         public static string url = "http://localhost:8000/";
         public static int pageViews;
         public static int requestCount;
+        public const string Keyword = "/koth";
+        public const string DisplayName = "KotH";
+        public const ushort ComId = 42511;
+        public static bool IsInitilaized = false;
+        public string BotMessage = "";
+        private Network Network => Network.Instance;
 
         public static string pageData =
             "<!DOCTYPE>" +
@@ -96,8 +104,35 @@ namespace KothPlugin
             SetupConfig();
             _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
+            SetupNetwork();
         }
 
+        private void SetupNetwork()
+        {
+            if (!IsInitilaized)
+            {
+                Network.Init(ComId, DisplayName, Keyword);
+            }
+            
+            if (Network.NetworkType == NetworkTypes.Client)
+            {
+                //MyVisualScriptLogicProvider.SendChatMessage("does not know it is a server");
+                Network.RegisterNetworkCommand("Wipe", ServerCallBack_Wipe);
+                Network.RegisterNetworkCommand("BotMessage", ServerCallback_BotMessage);
+            }
+            else
+            {
+                //MyVisualScriptLogicProvider.SendChatMessage("knows it is a server");
+                Network.RegisterNetworkCommand("Wipe", ServerCallBack_Wipe);
+                Network.RegisterNetworkCommand("BotMessage", ServerCallback_BotMessage);
+                IsInitilaized = true;
+            }
+        }
+
+        public void Wiped()
+        {
+            Network.SendCommand("wiped");
+        }
 
         private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
         {
@@ -117,7 +152,7 @@ namespace KothPlugin
                     listener.Start();
                     Log.Info("Listening for connections on {0}", url);
                     Task.Run(async () => await HandleIncomingConnections());
-                    SendWebHook("Testy", "Testy test");
+                    
                     WebService.StartWebServer();
                     break;
                 case TorchSessionState.Unloading:
@@ -166,10 +201,9 @@ namespace KothPlugin
             }
         }
 
-
         public async void SendWebHook(string title, string msg)
         {
-            using (var client = new DiscordWebhookClient("https://discord.com/api/webhooks/798452252070248468/VaNjf14sCkPLOoAr4hZtZRLf8qDThkIEoatAMGdPTlhnZI802t2PAoi9zV1g5WVxGvPi"))
+            using (var client = new DiscordWebhookClient("https://discordapp.com/api/webhooks/798454863452831784/IVawsrVD46QFbLVxwFarrEGUTZBTScQcQYUbYTapbPKDvVU9TnodMkwYyrLunZRDkzRL"))
             {
                 var embed = new EmbedBuilder
                 {
@@ -178,6 +212,19 @@ namespace KothPlugin
                 };
                 await client.SendMessageAsync(msg, embeds: new[] {embed.Build()});
             }
+        }
+        
+        private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)
+        {
+           // Clearscore();
+        }
+        
+        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
+        {
+            BotMessage = ASCIIEncoding.ASCII.GetString(data);
+            SendWebHook("FuckReload", BotMessage);
+
+            //MyVisualScriptLogicProvider.SendChatMessage("servercallback update");
         }
         
 
@@ -192,15 +239,13 @@ namespace KothPlugin
         private void Initialize()
         {
             _init = true;
-
-            Communication.RegisterHandlers();
         }
 
 
         public override void Dispose()
         {
-            base.Dispose();
-            Communication.UnregisterHandlers();
+            Network.Dispose();
+
         }
     }
 }

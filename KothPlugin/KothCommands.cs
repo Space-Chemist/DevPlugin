@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using KothPlugin.ModNetworkAPI;
 using Torch.Commands;
 using Torch.Commands.Permissions;
 using VRage.Game;
@@ -33,8 +34,9 @@ namespace KothPlugin
         [Permission(MyPromoteLevel.Admin)]
         public void ClearScores()
         {
-            Communication.Message();
-            this.Context.Respond("Koth plugin reset koth scores");
+            
+            //Koth.Wiped();
+            this.Context.Respond("this needs fixed");
         }
 
         // [Command("score", "output scores", null)]
