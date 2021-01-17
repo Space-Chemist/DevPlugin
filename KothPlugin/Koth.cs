@@ -89,6 +89,7 @@ namespace KothPlugin
                 case TorchSessionState.Loading:
                     break;
                 case TorchSessionState.Loaded:
+                    SetPath();
                     WebService.StartWebServer();
                     SetupNetwork();
                     break;
@@ -126,6 +127,14 @@ namespace KothPlugin
         }
 
 
+        private Void SetPath()
+        {
+            var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
+            KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
+            if (!File.Exists(KothScorePath)) Log.Error("KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL");
+        }
+
+
         public static session ScoresFromStorage()
 
         {
@@ -138,9 +147,6 @@ namespace KothPlugin
 
         public async void SendDiscordWebHook(string title, string msg)
         {
-            var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
-            KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
-            if (!File.Exists(KothScorePath)) Log.Error("KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL");
             const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip";
             using (var client = new DiscordWebhookClient(webhookUrl))
             {
