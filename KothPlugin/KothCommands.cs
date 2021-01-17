@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using KothPlugin.ModNetworkAPI;
 using Torch.Commands;
@@ -36,7 +37,10 @@ namespace KothPlugin
         {
             
             //Koth.Wiped();
-            this.Context.Respond("this needs fixed");
+            
+            this.Context.Respond("this has been fixed");
+            byte[] bytes = Encoding.ASCII.GetBytes("clear");
+            MyAPIGateway.Multiplayer.SendMessageToServer(8008, bytes);
         }
 
         // [Command("score", "output scores", null)]
