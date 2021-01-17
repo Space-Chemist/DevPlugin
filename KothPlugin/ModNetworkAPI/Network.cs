@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Interop;
 using NLog.Fluent;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Utils;
+using NLog;
+using Torch.API.Managers;
+using Torch.Managers;
 
 namespace KothPlugin.ModNetworkAPI
 {
    public enum NetworkTypes { Dedicated, Server, Client }
+   
 
     public abstract class Network
     {
         public static Network Instance = null;
         public static bool IsInitialized = Instance != null;
-        
+        public static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Event triggers apon reciveing data over the network
@@ -49,6 +54,8 @@ namespace KothPlugin.ModNetworkAPI
         /// <param name="comId">The communication channel this mod will listen on</param>
         /// <param name="modName">The title use for displaying chat messages</param>
         /// <param name="keyword">The string identifying a chat command</param>
+        /// <param name="steamId">fuck you bitch whore cunt</param>
+        /// 
         protected Network(ushort comId, string modName, string keyword = null)
         {
             ComId = comId;
@@ -57,14 +64,28 @@ namespace KothPlugin.ModNetworkAPI
 
             if (UsingTextCommands)
             {
-                MyAPIGateway.Utilities.MessageEntered += HandleChatInput;
+                //MyAPIGateway.Utilities.MessageEntered += HandleChatInput;
             }
-
-            MyAPIGateway.Multiplayer.RegisterMessageHandler(ComId, HandleIncomingPacket);
+            RegisterNetworkHandler(comId);
+           
+            
 
             Log.Info($"[NetworkAPI] Initialized. ComId: {ComId} Name: {ModName} Keyword: {Keyword}");
         }
-        
+
+
+        /// <summary>
+        /// Unpacks commands and handles arguments
+        /// </summary>
+        /// <param name="comId">The communication channel this mod will listen on</param>
+        /// <param name="msg">Data chunck recived from the network</param>
+        /// <param name="steamId">A players steam id</param>
+        /// <param name="isReliable">true</param>
+        private void RegisterNetworkHandler(ushort comId, byte[] msg, ulong steamId = ulong.MinValue, bool isReliable = true)
+        {
+            HandleIncomingPacket(comId, msg, steamId, isReliable);
+        }
+
         /*public enum MessageType : byte
         {
             DeleteD = 0,
@@ -160,7 +181,7 @@ namespace KothPlugin.ModNetworkAPI
             MyAPIGateway.Utilities.InvokeOnGameThread(() => { MyAPIGateway.Multiplayer.SendMessageToServer(ComId, newData); });
         }*/
 
-        /// <summary>
+        /*/// <summary>
         /// Invokes chat command events
         /// </summary>
         /// <param name="messageText">Chat message string</param>
@@ -190,13 +211,16 @@ namespace KothPlugin.ModNetworkAPI
                     MyAPIGateway.Utilities.ShowMessage(ModName, "Command not recognized.");
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// Unpacks commands and handles arguments
         /// </summary>
+        /// <param name="comId">The communication channel this mod will listen on</param>
         /// <param name="msg">Data chunck recived from the network</param>
-        private void HandleIncomingPacket(byte[] msg)
+        /// <param name="steamId">A players steam id</param>
+        /// <param name="isReliable">true</param>
+        private void HandleIncomingPacket(ushort comId, byte[] msg, ulong steamId = ulong.MinValue, bool isReliable = true)
         {
             try
             {
@@ -225,9 +249,9 @@ namespace KothPlugin.ModNetworkAPI
                 }
 
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                
+                Log.Error(error, "server error");
             }
         }
 
@@ -317,11 +341,12 @@ namespace KothPlugin.ModNetworkAPI
             MyLog.Default.Info($"[NetworkAPI] Unregistering communication stream: {ComId}");
             if (UsingTextCommands)
             {
-                MyAPIGateway.Utilities.MessageEntered -= HandleChatInput;
+                //MyAPIGateway.Utilities.MessageEntered -= HandleChatInput;
             }
             
+            bool UnregisterNetworkHandler(INetworkHandler HandleIncomingPacket);
 
-            MyAPIGateway.Multiplayer.UnregisterMessageHandler(ComId, HandleIncomingPacket);
+            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(ComId, HandleIncomingPacket);
 
         }
 
