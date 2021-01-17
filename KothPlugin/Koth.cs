@@ -11,13 +11,14 @@ using Sandbox.ModAPI;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
+using Torch.API.Plugins;
 using Torch.API.Session;
 using Torch.Session;
 
 
 namespace KothPlugin
 {
-    public class Koth : TorchPluginBase
+    public class Koth : TorchPluginBase, IWpfPlugin
     {
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public static string KothScorePath = "";
