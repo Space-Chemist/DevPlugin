@@ -103,18 +103,5 @@ namespace KothPlugin
                 return (session) serializer.Deserialize(reader);
             }
         }
-        public static async void SendDiscordWebHook(string title, string msg)
-        {
-            const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config
-            using (var client = new DiscordWebhookClient(webhookUrl))
-            {
-                var embed = new EmbedBuilder
-                {
-                    Title = title,
-                    Description = msg
-                };
-                await client.SendMessageAsync("", embeds: new[] {embed.Build()});
-            }
-        }
     }
 }

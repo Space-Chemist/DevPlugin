@@ -226,6 +226,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiscordService.cs" />
     <Compile Include="NetworkService.cs" />
     <Compile Include="WebService.cs" />
     <Compile Include="Xmlservice.cs" />

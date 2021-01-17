@@ -20,11 +20,11 @@ namespace KothPlugin
             {
                 var message = Encoding.ASCII.GetString(msg);
                 if (message.Equals("clear")) return;
-                Koth.SendDiscordWebHook("</reloadisgay>", message);
+                DiscordService.SendDiscordWebHook(message);
             }
             catch (Exception error)
             {
-                Log.Error(error, "server error");
+                Log.Error(error, "Network error");
             }
         }
 
@@ -38,7 +38,7 @@ namespace KothPlugin
             }
             catch (Exception error)
             {
-                Log.Error(error, "server error");
+                Log.Error(error, "Network error");
             }
         }
     }
