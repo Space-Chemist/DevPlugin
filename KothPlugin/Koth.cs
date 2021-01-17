@@ -1,44 +1,27 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml.Serialization;
 using Discord;
 using Discord.Webhook;
-using KothPlugin.ModNetworkAPI;
-using Nest;
 using NLog;
 using Sandbox;
-using Sandbox.Game.World;
 using Sandbox.ModAPI;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Session;
-using Torch.Managers.PatchManager;
 using Torch.Session;
-using VRage.Game;
+
 
 namespace KothPlugin
 {
     public class Koth : TorchPluginBase
     {
         public static bool _init;
-
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
-        public const string Keyword = "/koth";
-        public const string DisplayName = "KotH";
-        public const ushort ComId = 42511;
-        public static bool IsInitilaized = false;
-        public string BotMessage = "";
-        private Network Network => Network.Instance;
         public static string KothScorePath = "";
-
         private Persistent<KothPluginConfig> _config;
         private KothPluginControl _control;
         private TorchSessionManager _sessionManager;
@@ -58,29 +41,6 @@ namespace KothPlugin
             _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
             
         }
-
-        private void SetupNetwork()
-        {
-            if (!IsInitilaized)
-            {
-                Network.Init(ComId, DisplayName, Keyword);
-            }
-            
-            if (Network.NetworkType == NetworkTypes.Client)
-            {
-                //MyVisualScriptLogicProvider.SendChatMessage("does not know it is a server");
-                Network.RegisterNetworkCommand("Wipe", ServerCallBack_Wipe);
-                Network.RegisterNetworkCommand("BotMessage", ServerCallback_BotMessage);
-            }
-            else
-            {
-                //MyVisualScriptLogicProvider.SendChatMessage("knows it is a server");
-                Network.RegisterNetworkCommand("Wipe", ServerCallBack_Wipe);
-                Network.RegisterNetworkCommand("BotMessage", ServerCallback_BotMessage);
-                IsInitilaized = true;
-            }
-        }
-
 
         private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
         {
@@ -147,7 +107,7 @@ namespace KothPlugin
         }
 
 
-        private Void SetPath()
+        private void SetPath()
         {
             var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
             KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
@@ -178,21 +138,6 @@ namespace KothPlugin
                 await client.SendMessageAsync("", embeds: new[] {embed.Build()});
             }
         }
-
-        private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)
-        {
-            // Clearscore();
-        }
-
-        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
-        {
-            BotMessage = ASCIIEncoding.ASCII.GetString(data);
-            SendDiscordWebHook("FuckReload", BotMessage);
-
-            //MyVisualScriptLogicProvider.SendChatMessage("servercallback update");
-        }
-
-
         public override void Update()
         {
             //try{
