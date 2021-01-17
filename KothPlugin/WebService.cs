@@ -18,6 +18,8 @@ namespace KothPlugin
 
         private const bool ApiEnabled = true; //TODO config
 
+        private const bool WebPageEnabled = true; //TODO config
+
         private static readonly HttpListener Listener = new HttpListener {Prefixes = {$"http://{Host}:{Port}/"}};
 
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
@@ -111,15 +113,23 @@ namespace KothPlugin
                             switch (context.Request.HttpMethod)
                             {
                                 case "GET":
-                                    var kothdata = Koth.ScoresFromStorage();
-                                    var data = Encoding.UTF8.GetBytes(PageHtml.Replace("REPLACEMEYES",
-                                        JsonConvert.SerializeObject(kothdata)));
-                                    response.ContentType = "text/html";
-                                    response.ContentEncoding = Encoding.UTF8;
-                                    response.ContentLength64 = data.LongLength;
-                                    response.OutputStream.Write(data, 0, data.Length);
-                                    handled = true;
-                                    break;
+                                    if (WebPageEnabled)
+                                    {
+                                        var kothdata = Koth.ScoresFromStorage();
+                                        var data = Encoding.UTF8.GetBytes(PageHtml.Replace("REPLACEMEYES",
+                                            JsonConvert.SerializeObject(kothdata)));
+                                        response.ContentType = "text/html";
+                                        response.ContentEncoding = Encoding.UTF8;
+                                        response.ContentLength64 = data.LongLength;
+                                        response.OutputStream.Write(data, 0, data.Length);
+                                        handled = true;
+                                        break;
+                                    }
+
+                                    else
+                                    {
+                                        break;
+                                    }
                             }
 
                             break;
