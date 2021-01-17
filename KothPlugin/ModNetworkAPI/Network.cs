@@ -347,7 +347,7 @@ namespace KothPlugin.ModNetworkAPI
             {
                 //MyAPIGateway.Utilities.MessageEntered -= HandleChatInput;
             }
-            
+
             //bool UnregisterNetworkHandler(INetworkHandler HandleIncomingPacket);
 
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(ComId, HandleIncomingPacket);

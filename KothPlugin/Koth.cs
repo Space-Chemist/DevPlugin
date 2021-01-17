@@ -147,7 +147,7 @@ namespace KothPlugin
 
         public async void SendDiscordWebHook(string title, string msg)
         {
-            const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip";
+            const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config
             using (var client = new DiscordWebhookClient(webhookUrl))
             {
                 var embed = new EmbedBuilder
@@ -164,12 +164,10 @@ namespace KothPlugin
             // Clearscore();
         }
 
-        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
+        public void ServerCallback_BotMessage(String msg)
         {
-            BotMessage = ASCIIEncoding.ASCII.GetString(data);
-            SendDiscordWebHook("FuckReload", BotMessage);
-
-            //MyVisualScriptLogicProvider.SendChatMessage("servercallback update");
+            SendDiscordWebHook("KOTH SCORE!", msg);
+            
         }
 
 
