@@ -91,7 +91,8 @@ namespace KothPlugin
                 case TorchSessionState.Loaded:
                     SetPath();
                     WebService.StartWebServer();
-                    SetupNetwork();
+                    //SetupNetwork();
+                    MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(8008, HandleIncomingPacket);
                     break;
                 case TorchSessionState.Unloading:
                     break;
@@ -102,6 +103,25 @@ namespace KothPlugin
                     throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);
             }
         }
+        
+        
+        
+        private void HandleIncomingPacket(ushort comId, byte[] msg ,ulong id, bool relible)
+        {
+            try
+            {
+                string message = Encoding.ASCII.GetString(msg);
+                SendDiscordWebHook("</reloadisgay>", message);
+                
+            }
+            catch (Exception error)
+            {
+                Log.Error(error, "server error");
+            }
+        }
+
+        
+        
 
         private void SetupConfig()
         {
@@ -164,10 +184,12 @@ namespace KothPlugin
             // Clearscore();
         }
 
-        public void ServerCallback_BotMessage(String msg)
+        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)
         {
-            SendDiscordWebHook("KOTH SCORE!", msg);
-            
+            BotMessage = ASCIIEncoding.ASCII.GetString(data);
+            SendDiscordWebHook("FuckReload", BotMessage);
+
+            //MyVisualScriptLogicProvider.SendChatMessage("servercallback update");
         }
 
 
