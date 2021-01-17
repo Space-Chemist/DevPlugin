@@ -50,8 +50,8 @@ namespace KothPlugin
                     break;
                 case TorchSessionState.Loaded:
                     SetPath();
+                    NetworkService.NetworkInit();
                     WebService.StartWebServer();
-                    MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(8008, HandleIncomingPacket);
                     break;
                 case TorchSessionState.Unloading:
                     break;
@@ -60,20 +60,6 @@ namespace KothPlugin
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);
-            }
-        }
-        
-        private static void HandleIncomingPacket(ushort comId, byte[] msg ,ulong id, bool relible)
-        {
-            try
-            {
-                string message = Encoding.ASCII.GetString(msg);
-                SendDiscordWebHook("</reloadisgay>", message);
-                
-            }
-            catch (Exception error)
-            {
-                Log.Error(error, "server error");
             }
         }
         
