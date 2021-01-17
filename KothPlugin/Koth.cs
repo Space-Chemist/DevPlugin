@@ -42,7 +42,7 @@ namespace KothPlugin
             
         }
 
-        private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
+        private static void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
         {
             switch (newstate)
             {
@@ -51,7 +51,6 @@ namespace KothPlugin
                 case TorchSessionState.Loaded:
                     SetPath();
                     WebService.StartWebServer();
-                    //SetupNetwork();
                     MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(8008, HandleIncomingPacket);
                     break;
                 case TorchSessionState.Unloading:
@@ -64,9 +63,7 @@ namespace KothPlugin
             }
         }
         
-        
-        
-        private void HandleIncomingPacket(ushort comId, byte[] msg ,ulong id, bool relible)
+        private static void HandleIncomingPacket(ushort comId, byte[] msg ,ulong id, bool relible)
         {
             try
             {
@@ -104,7 +101,7 @@ namespace KothPlugin
         }
 
 
-        private void SetPath()
+        private static void SetPath()
         {
             var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
             KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
@@ -120,7 +117,7 @@ namespace KothPlugin
                 return (session) serializer.Deserialize(reader);
             }
         }
-        public async void SendDiscordWebHook(string title, string msg)
+        public static async void SendDiscordWebHook(string title, string msg)
         {
             const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config
             using (var client = new DiscordWebhookClient(webhookUrl))
