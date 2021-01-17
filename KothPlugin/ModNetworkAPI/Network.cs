@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Interop;
+using Newtonsoft.Json.Serialization;
 using NLog.Fluent;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Utils;
 using NLog;
+using Sandbox.Game.Entities.Cube;
 using Torch.API.Managers;
 using Torch.Managers;
+using VRage;
+using VRage.Library.Collections;
+using VRage.Replication;
+using static KothPlugin.ModNetworkAPI.Network;
 
 namespace KothPlugin.ModNetworkAPI
 {
@@ -54,9 +62,8 @@ namespace KothPlugin.ModNetworkAPI
         /// <param name="comId">The communication channel this mod will listen on</param>
         /// <param name="modName">The title use for displaying chat messages</param>
         /// <param name="keyword">The string identifying a chat command</param>
-        /// <param name="steamId">fuck you bitch whore cunt</param>
-        /// 
-        protected Network(ushort comId, string modName, string keyword = null)
+        
+        public Network(ushort comId, string modName, string keyword = null)
         {
             ComId = comId;
             ModName = modName ?? string.Empty;
@@ -66,25 +73,22 @@ namespace KothPlugin.ModNetworkAPI
             {
                 //MyAPIGateway.Utilities.MessageEntered += HandleChatInput;
             }
-            RegisterNetworkHandler(comId);
-           
             
+            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(ComId, HandleIncomingPacket);
 
             Log.Info($"[NetworkAPI] Initialized. ComId: {ComId} Name: {ModName} Keyword: {Keyword}");
         }
 
 
-        /// <summary>
-        /// Unpacks commands and handles arguments
-        /// </summary>
-        /// <param name="comId">The communication channel this mod will listen on</param>
-        /// <param name="msg">Data chunck recived from the network</param>
-        /// <param name="steamId">A players steam id</param>
-        /// <param name="isReliable">true</param>
-        private void RegisterNetworkHandler(ushort comId, byte[] msg, ulong steamId = ulong.MinValue, bool isReliable = true)
+        /*/// <param name="comId">The communication channel this mod will listen on</param>
+        /// <param name="steamId">fuck you bitch whore cunt</param>
+        /// <param name="msg"> kill me god</param>
+        /// <param name="isReliable"> please god work</param>
+        public void RegisterNetworkHandler(INetworkHandler HandleIncomingPacket(Koth.)
         {
-            HandleIncomingPacket(comId, msg, steamId, isReliable);
-        }
+            HandleIncomingPacket(ComId, msg, steamId, isReliable);
+        }*/
+        
 
         /*public enum MessageType : byte
         {
@@ -344,7 +348,7 @@ namespace KothPlugin.ModNetworkAPI
                 //MyAPIGateway.Utilities.MessageEntered -= HandleChatInput;
             }
             
-            bool UnregisterNetworkHandler(INetworkHandler HandleIncomingPacket);
+            //bool UnregisterNetworkHandler(INetworkHandler HandleIncomingPacket);
 
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(ComId, HandleIncomingPacket);
 

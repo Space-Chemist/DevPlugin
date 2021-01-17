@@ -10,6 +10,7 @@ namespace KothPlugin.ModNetworkAPI
         /// </summary>
         /// <param name="comId">Identifies the channel to pass information to and from this mod</param>
         /// <param name="keyword">identifies what chat entries should be captured and sent to the server</param>
+        /// <param name="modName">mod is called</param>
         public Client(ushort comId, string modName, string keyword = null) : base(comId, modName, keyword)
         {
         }
