@@ -226,10 +226,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModNetworkAPI\Client.cs" />
-    <Compile Include="ModNetworkAPI\Command.cs" />
-    <Compile Include="ModNetworkAPI\Network.cs" />
-    <Compile Include="ModNetworkAPI\Server.cs" />
     <Compile Include="WebService.cs" />
     <Compile Include="Xmlservice.cs" />
     <Page Include="KothPluginControl.xaml">

@@ -19,7 +19,6 @@ namespace KothPlugin
 {
     public class Koth : TorchPluginBase
     {
-        public static bool _init;
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public static string KothScorePath = "";
         private Persistent<KothPluginConfig> _config;
@@ -79,10 +78,7 @@ namespace KothPlugin
                 Log.Error(error, "server error");
             }
         }
-
         
-        
-
         private void SetupConfig()
         {
             var configFile = Path.Combine(StoragePath, "KothPluginConfig.cfg");
@@ -113,8 +109,7 @@ namespace KothPlugin
             KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
             if (!File.Exists(KothScorePath)) Log.Error("KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL");
         }
-
-
+        
         public static session ScoresFromStorage()
 
         {
@@ -124,7 +119,6 @@ namespace KothPlugin
                 return (session) serializer.Deserialize(reader);
             }
         }
-
         public async void SendDiscordWebHook(string title, string msg)
         {
             const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config
@@ -137,24 +131,6 @@ namespace KothPlugin
                 };
                 await client.SendMessageAsync("", embeds: new[] {embed.Build()});
             }
-        }
-        public override void Update()
-        {
-            //try{
-            if (MyAPIGateway.Session == null) return;
-
-            if (!_init) Initialize();
-        }
-
-        private void Initialize()
-        {
-            _init = true;
-        }
-
-
-        public override void Dispose()
-        {
-            //Network.Dispose();
         }
     }
 }
