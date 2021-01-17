@@ -25,8 +25,7 @@ namespace KothPlugin
         public void ClearScores()
         {
             this.Context.Respond("this has been fixed");
-            byte[] bytes = Encoding.ASCII.GetBytes("clear");
-            MyAPIGateway.Multiplayer.SendMessageToServer(8008, bytes);
+            NetworkService.SendPacket("clear");
         }
 
     }
