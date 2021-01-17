@@ -38,8 +38,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Discord.Net.Commands, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Discord.Net.Commands.2.2.0\lib\net461\Discord.Net.Commands.dll</HintPath>
+    <Reference Include="Discord.Net.Commands, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Discord.Net.Commands.2.3.0-dev-20201223.7\lib\net461\Discord.Net.Commands.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Discord.Net.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
@@ -54,8 +54,8 @@
       <HintPath>..\packages\Discord.Net.Webhook.2.3.0-dev-20201223.7\lib\netstandard2.0\Discord.Net.Webhook.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Discord.Net.WebSocket, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Discord.Net.WebSocket.2.2.0\lib\net461\Discord.Net.WebSocket.dll</HintPath>
+    <Reference Include="Discord.Net.WebSocket, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Discord.Net.WebSocket.2.3.0-dev-20201223.7\lib\net461\Discord.Net.WebSocket.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Elasticsearch.Net, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d">

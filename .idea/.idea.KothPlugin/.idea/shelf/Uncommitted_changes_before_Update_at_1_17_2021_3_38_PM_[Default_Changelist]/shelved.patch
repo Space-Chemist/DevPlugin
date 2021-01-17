@@ -1,0 +1,74 @@
+Index: KothPlugin/Koth.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.IO;\r\nusing System.Linq;\r\nusing System.Net;\r\nusing System.Reflection;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Windows.Controls;\r\nusing System.Xml.Serialization;\r\nusing Discord;\r\nusing Discord.Webhook;\r\nusing KothPlugin.ModNetworkAPI;\r\nusing Nest;\r\nusing NLog;\r\nusing Sandbox;\r\nusing Sandbox.Game.World;\r\nusing Sandbox.ModAPI;\r\nusing Torch;\r\nusing Torch.API;\r\nusing Torch.API.Managers;\r\nusing Torch.API.Session;\r\nusing Torch.Managers.PatchManager;\r\nusing Torch.Session;\r\nusing VRage.Game;\r\n\r\nnamespace KothPlugin\r\n{\r\n    public class Koth : TorchPluginBase\r\n    {\r\n        public static bool _init;\r\n\r\n        public static readonly Logger Log = LogManager.GetCurrentClassLogger();\r\n\r\n        public const string Keyword = \"/koth\";\r\n        public const string DisplayName = \"KotH\";\r\n        public const ushort ComId = 42511;\r\n        public static bool IsInitilaized = false;\r\n        public string BotMessage = \"\";\r\n        private Network Network => Network.Instance;\r\n        public static string KothScorePath = \"\";\r\n\r\n        private Persistent<KothPluginConfig> _config;\r\n        private KothPluginControl _control;\r\n        private TorchSessionManager _sessionManager;\r\n        public KothPluginConfig Config => _config?.Data;\r\n\r\n        public UserControl GetControl()\r\n        {\r\n            return _control ?? (_control = new KothPluginControl(this));\r\n        }\r\n\r\n        public override void Init(ITorchBase torch)\r\n        {\r\n            base.Init(torch);\r\n            SetupConfig();\r\n            \r\n            _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();\r\n            _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;\r\n            \r\n        }\r\n\r\n        private void SetupNetwork()\r\n        {\r\n            if (!IsInitilaized)\r\n            {\r\n                Network.Init(ComId, DisplayName, Keyword);\r\n            }\r\n            \r\n            if (Network.NetworkType == NetworkTypes.Client)\r\n            {\r\n                //MyVisualScriptLogicProvider.SendChatMessage(\"does not know it is a server\");\r\n                Network.RegisterNetworkCommand(\"Wipe\", ServerCallBack_Wipe);\r\n                Network.RegisterNetworkCommand(\"BotMessage\", ServerCallback_BotMessage);\r\n            }\r\n            else\r\n            {\r\n                //MyVisualScriptLogicProvider.SendChatMessage(\"knows it is a server\");\r\n                Network.RegisterNetworkCommand(\"Wipe\", ServerCallBack_Wipe);\r\n                Network.RegisterNetworkCommand(\"BotMessage\", ServerCallback_BotMessage);\r\n                IsInitilaized = true;\r\n            }\r\n        }\r\n\r\n\r\n        private void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)\r\n        {\r\n            switch (newstate)\r\n            {\r\n                case TorchSessionState.Loading:\r\n                    break;\r\n                case TorchSessionState.Loaded:\r\n                    SetPath();\r\n                    WebService.StartWebServer();\r\n                    //SetupNetwork();\r\n                    MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(8008, HandleIncomingPacket);\r\n                    break;\r\n                case TorchSessionState.Unloading:\r\n                    break;\r\n                case TorchSessionState.Unloaded:\r\n                    WebService.StopWebServer();\r\n                    break;\r\n                default:\r\n                    throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);\r\n            }\r\n        }\r\n        \r\n        \r\n        \r\n        private void HandleIncomingPacket(ushort comId, byte[] msg ,ulong id, bool relible)\r\n        {\r\n            try\r\n            {\r\n                string message = Encoding.ASCII.GetString(msg);\r\n                SendDiscordWebHook(\"</reloadisgay>\", message);\r\n                \r\n            }\r\n            catch (Exception error)\r\n            {\r\n                Log.Error(error, \"server error\");\r\n            }\r\n        }\r\n\r\n        \r\n        \r\n\r\n        private void SetupConfig()\r\n        {\r\n            var configFile = Path.Combine(StoragePath, \"KothPluginConfig.cfg\");\r\n            try\r\n            {\r\n                _config = Persistent<KothPluginConfig>.Load(configFile);\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                Log.Warn(e);\r\n            }\r\n\r\n            if (_config?.Data != null) return;\r\n            Log.Info(\"Creating Default Config\");\r\n            _config = new Persistent<KothPluginConfig>(configFile, new KothPluginConfig());\r\n            _config.Save();\r\n        }\r\n\r\n        public void Save()\r\n        {\r\n            _config.Save();\r\n        }\r\n\r\n\r\n        private Void SetPath()\r\n        {\r\n            var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;\r\n            KothScorePath = Path.Combine(kothScoreName, @\"Storage\\2002161364.sbm_NewKoth\\Scores.data\");\r\n            if (!File.Exists(KothScorePath)) Log.Error(\"KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL\");\r\n        }\r\n\r\n\r\n        public static session ScoresFromStorage()\r\n\r\n        {\r\n            var serializer = new XmlSerializer(typeof(session));\r\n            using (var reader = new StreamReader(KothScorePath))\r\n            {\r\n                return (session) serializer.Deserialize(reader);\r\n            }\r\n        }\r\n\r\n        public async void SendDiscordWebHook(string title, string msg)\r\n        {\r\n            const string webhookUrl = \"https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip\"; //TODO Config\r\n            using (var client = new DiscordWebhookClient(webhookUrl))\r\n            {\r\n                var embed = new EmbedBuilder\r\n                {\r\n                    Title = title,\r\n                    Description = msg\r\n                };\r\n                await client.SendMessageAsync(\"\", embeds: new[] {embed.Build()});\r\n            }\r\n        }\r\n\r\n        private void ServerCallBack_Wipe(ulong steamId, string commandString, byte[] data)\r\n        {\r\n            // Clearscore();\r\n        }\r\n\r\n        public void ServerCallback_BotMessage(ulong steamId, string commandString, byte[] data)\r\n        {\r\n            BotMessage = ASCIIEncoding.ASCII.GetString(data);\r\n            SendDiscordWebHook(\"FuckReload\", BotMessage);\r\n\r\n            //MyVisualScriptLogicProvider.SendChatMessage(\"servercallback update\");\r\n        }\r\n\r\n\r\n        public override void Update()\r\n        {\r\n            //try{\r\n            if (MyAPIGateway.Session == null) return;\r\n\r\n            if (!_init) Initialize();\r\n        }\r\n\r\n        private void Initialize()\r\n        {\r\n            _init = true;\r\n        }\r\n\r\n\r\n        public override void Dispose()\r\n        {\r\n            //Network.Dispose();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/KothPlugin/Koth.cs b/KothPlugin/Koth.cs
+--- a/KothPlugin/Koth.cs	
++++ b/KothPlugin/Koth.cs	
+@@ -53,10 +53,9 @@
+         {
+             base.Init(torch);
+             SetupConfig();
+-            
++
+             _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
+             _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
+-            
+         }
+ 
+         private void SetupNetwork()
+@@ -65,7 +64,7 @@
+             {
+                 Network.Init(ComId, DisplayName, Keyword);
+             }
+-            
++
+             if (Network.NetworkType == NetworkTypes.Client)
+             {
+                 //MyVisualScriptLogicProvider.SendChatMessage("does not know it is a server");
+@@ -103,16 +102,17 @@
+                     throw new ArgumentOutOfRangeException(nameof(newstate), newstate, null);
+             }
+         }
+-        
+-        
+-        
+-        private void HandleIncomingPacket(ushort comId, byte[] msg ,ulong id, bool relible)
++
++
++        private void HandleIncomingPacket(ushort comId, byte[] msg, ulong id, bool relible)
+         {
+             try
+             {
+                 string message = Encoding.ASCII.GetString(msg);
+-                SendDiscordWebHook("</reloadisgay>", message);
+-                
++                if (!message.Equals("clear"))
++                {
++                    SendDiscordWebHook("</reloadisgay>", message);
++                }
+             }
+             catch (Exception error)
+             {
+@@ -120,8 +120,6 @@
+             }
+         }
+ 
+-        
+-        
+ 
+         private void SetupConfig()
+         {
+@@ -167,7 +165,8 @@
+ 
+         public async void SendDiscordWebHook(string title, string msg)
+         {
+-            const string webhookUrl = "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config
++            const string webhookUrl =
++                "https://discordapp.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config
+             using (var client = new DiscordWebhookClient(webhookUrl))
+             {
+                 var embed = new EmbedBuilder

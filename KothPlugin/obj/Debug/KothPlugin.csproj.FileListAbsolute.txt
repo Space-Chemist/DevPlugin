@@ -230,7 +230,6 @@ C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\SharpDX.Desktop.dll
 C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\DirectShowLib.dll
 C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\GameAnalytics.Mono.dll
 C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Reflection.Metadata.dll
-C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Text.Encoding.CodePages.dll
 C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Data.SQLite.dll
 C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Elasticsearch.Net.pdb
@@ -527,3 +526,19 @@ C:\Users\cleve\OneDrive\Desktop\plugin stuff\kothplugin\KothPlugin\obj\Debug\Kot
 C:\Users\cleve\OneDrive\Desktop\plugin stuff\kothplugin\KothPlugin\obj\Debug\KothPlugin.csproj.CopyComplete
 C:\Users\cleve\OneDrive\Desktop\plugin stuff\kothplugin\KothPlugin\obj\Debug\KothPlugin.dll
 C:\Users\cleve\OneDrive\Desktop\plugin stuff\kothplugin\KothPlugin\obj\Debug\KothPlugin.pdb
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Commands.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Core.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Rest.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Webhook.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.WebSocket.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Interactive.Async.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Linq.Async.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Commands.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Core.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Rest.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.Webhook.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\Discord.Net.WebSocket.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Collections.Immutable.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Interactive.Async.xml
+C:\Users\Tails\RiderProjects\DevPlugin\KothPlugin\bin\Debug\System.Linq.Async.xml
