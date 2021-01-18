@@ -9,7 +9,7 @@ namespace KothPlugin
         public static async void SendDiscordWebHook(string msg)
         {
             const string webhookUrl = "https://discord.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config //Done
-            const bool embedEnabled = true; //TODO Config //Done
+            var embedEnabled = Koth.Instance.Config.EmbedEnabled; //TODO Config //Done?
             const string embedTitle = ""; //TODO Config   //Done
             const string color = "#8b1f5e"; //TODO Config  //Done
             const string messagePrefix = ""; //TODO Config //Done
@@ -19,7 +19,7 @@ namespace KothPlugin
                 msg = $"{messagePrefix} {msg}";
             }
             
-            if (KothPluginConfig.WebPageEnabled)
+            if (embedEnabled)
             {
                 var embed = new EmbedBuilder
                 {

@@ -20,6 +20,8 @@ namespace KothPlugin
 {
     public class Koth : TorchPluginBase, IWpfPlugin
     {
+        public static Koth Instance { get; private set; }
+
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public static string KothScorePath = "";
         private Persistent<KothPluginConfig> _config;
@@ -36,7 +38,7 @@ namespace KothPlugin
         {
             base.Init(torch);
             SetupConfig();
-            
+            Instance = this;
             _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
             
