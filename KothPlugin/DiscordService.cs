@@ -19,7 +19,7 @@ namespace KothPlugin
                 msg = $"{messagePrefix} {msg}";
             }
             
-            if (embedEnabled)
+            if (KothPluginConfig.WebPageEnabled)
             {
                 var embed = new EmbedBuilder
                 {
