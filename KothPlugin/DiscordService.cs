@@ -8,34 +8,28 @@ namespace KothPlugin
     {
         public static async void SendDiscordWebHook(string msg)
         {
-            const string webhookUrl = "https://discord.com/api/webhooks/800156920270815253/U05QvvZqSUm5iTLmEtLiIFJyGg19JR6rLOb16v6L05qraMypR6kpcQZSeD1NHegLb5Ip"; //TODO Config //Done
-            var embedEnabled = Koth.Instance.Config.EmbedEnabled; //TODO Config //Done?
-            const string embedTitle = ""; //TODO Config   //Done
-            const string color = "#8b1f5e"; //TODO Config  //Done
-            const string messagePrefix = ""; //TODO Config //Done
-
-            if (!string.IsNullOrEmpty(messagePrefix))
+            if (!string.IsNullOrEmpty(Koth.Instance.Config.MessagePrefix))
             {
-                msg = $"{messagePrefix} {msg}";
+                msg = $"{Koth.Instance.Config.MessagePrefix} {msg}";
             }
             
-            if (embedEnabled)
+            if (Koth.Instance.Config.EmbedEnabled)
             {
                 var embed = new EmbedBuilder
                 {
-                    Title = embedTitle,
-                    Color = new Color(Convert.ToUInt32(color.Replace("#", ""), 16)),
+                    Title = Koth.Instance.Config.EmbedTitle,
+                    Color = new Color(Convert.ToUInt32(Koth.Instance.Config.Color.Replace("#", ""), 16)),
                     Description = msg
                 };
                 
-                using (var client = new DiscordWebhookClient(webhookUrl))
+                using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
                 {
                     await client.SendMessageAsync("", embeds: new[] {embed.Build()});
                 }
             }
             else
             {
-                using (var client = new DiscordWebhookClient(webhookUrl))
+                using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
                 {
                     await client.SendMessageAsync(msg);
                 }
