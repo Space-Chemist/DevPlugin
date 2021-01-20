@@ -106,7 +106,7 @@ namespace KothPlugin
                             switch (context.Request.HttpMethod)
                             {
                                 case "GET":
-                                    if (Koth.Instance.Config.WebPageEnabled)
+                                    if (Koth.Instance.Config.WebServerEnabled)
                                     {
                                         var kothdata = Koth.ScoresFromStorage();
                                         var data = Encoding.UTF8.GetBytes(PageHtml.Replace("REPLACEMEYES",

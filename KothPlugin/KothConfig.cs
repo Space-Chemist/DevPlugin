@@ -17,11 +17,11 @@ namespace KothPlugin
         private string _color = "#8b1f5e";
         private bool _embedenabled = true;
         private string _embedtitle = "";
-        private bool _webpageenabled = true;
-        public bool WebPageEnabled
+        private bool _webserverenabled = true;
+        public bool WebServerEnabled
         {
-            get => _webpageenabled;
-            set => SetValue(ref _webpageenabled, value);
+            get => _webserverenabled;
+            set => SetValue(ref _webserverenabled, value);
         }
 
         public string EmbedTitle
