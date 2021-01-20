@@ -8,16 +8,18 @@ namespace KothPlugin
     {
         [ProtoMember(1)]
 
-        private bool _enabled = true;
+        private bool _webhookenabled = true;
+        private bool _webserverenabled = true;
+        private bool _embedenabled = true;
+        private bool _apienabled = true;
         private string _webhookUrl = "";
         private string _host = "localhost";
-        private bool _apienabled = true;
-        private int _port = 8888;
         private string _messageprefix = "";
         private string _color = "#8b1f5e";
-        private bool _embedenabled = true;
         private string _embedtitle = "";
-        private bool _webserverenabled = true;
+        private int _port = 8888;
+        
+        
         public bool WebServerEnabled
         {
             get => _webserverenabled;
@@ -54,7 +56,7 @@ namespace KothPlugin
             set => SetValue(ref _host, value);
         }
 
-        public bool Enabled { get => _enabled; set => SetValue(ref _enabled, value); }
+        public bool WebHookEnabled { get => _webhookenabled; set => SetValue(ref _webhookenabled, value); }
         public bool ApiEnabled
         {
             get => _apienabled;
