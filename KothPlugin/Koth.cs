@@ -92,7 +92,7 @@ namespace KothPlugin
 
         public static void SetPath()
         {
-            if (_sessionManager.CurrentSession.State == TorchSessionState.Loaded)
+            if (_sessionManager.CurrentSession !=null)
             {
                 var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
                 KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
