@@ -30,10 +30,8 @@ namespace KothPlugin
 
         private void TestWebHookButton_OnClick(object sender, RoutedEventArgs e)
         {
-            using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
-            { 
-                client.SendMessageAsync("Successful WebHook Test");
-            }
+            DiscordService.SendDiscordWebHook("Successful WebHook Test");
+            
         }
         
         private void ClearScoresButton_OnClick(object sender, RoutedEventArgs e)
