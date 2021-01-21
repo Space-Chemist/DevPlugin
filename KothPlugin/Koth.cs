@@ -27,7 +27,7 @@ namespace KothPlugin
         public static string KothScorePath = "";
         private Persistent<KothPluginConfig> _config;
         private KothPluginControl _control;
-        private TorchSessionManager _sessionManager;
+        private static TorchSessionManager _sessionManager;
         public KothPluginConfig Config => _config?.Data;
 
         public UserControl GetControl()
@@ -92,9 +92,17 @@ namespace KothPlugin
 
         public static void SetPath()
         {
-            var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
-            KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
-            if (!File.Exists(KothScorePath)) Log.Error("KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL");
+            if (_sessionManager.CurrentSession.State == TorchSessionState.Loaded)
+            {
+                var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
+                KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
+                if (!File.Exists(KothScorePath)) Log.Error("KOTH PLUGIN: NO SOCRE DATA, PLUGIN WILL FAIL");
+            }
+            else
+            {
+                Log.Error("Session not Loaded, cannot set path ");
+            }
+            
         }
         
         public static session ScoresFromStorage()
