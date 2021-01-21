@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
 using Discord;
@@ -89,7 +90,7 @@ namespace KothPlugin
         }
 
 
-        private static void SetPath()
+        public static void SetPath()
         {
             var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
             KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
@@ -97,7 +98,6 @@ namespace KothPlugin
         }
         
         public static session ScoresFromStorage()
-
         {
             var serializer = new XmlSerializer(typeof(session));
             using (var reader = new StreamReader(KothScorePath))
@@ -105,5 +105,7 @@ namespace KothPlugin
                 return (session) serializer.Deserialize(reader);
             }
         }
+        
+        
     }
 }

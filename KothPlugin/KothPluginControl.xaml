@@ -111,10 +111,10 @@
         </Grid>
         
         <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">
-            <Button  Content="Refresh Path" Margin="5" Click="SaveButton_OnClick" />
-            <Button  Content="Test WebHook" Margin="5" Click="TestButton_OnClick" />
-            <Button  Content="Clear Scores" Margin="5" Click="SaveButton_OnClick" />
-            <Button  Content="Update Config" Margin="5" Click="TestButton_OnClick" />
+            <Button  Content="Refresh Path" Margin="5" Click="RefreshPathButton_OnClick" />
+            <Button  Content="Test WebHook" Margin="5" Click="TestWebHookButton_OnClick" />
+            <Button  Content="Clear Scores" Margin="5" Click="ClearScoresButton_OnClick" />
+            <Button  Content="Update Config" Margin="5" Click="UpdateConfigButton_OnClick" />
         </StackPanel>
     </Grid>
 </UserControl>

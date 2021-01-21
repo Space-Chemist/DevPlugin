@@ -24,7 +24,7 @@ namespace KothPlugin
         [Permission(MyPromoteLevel.Admin)]
         public void ClearScores()
         {
-            this.Context.Respond("this has been fixed");
+            this.Context.Respond("Scores have been Cleared");
             NetworkService.SendPacket("clear");
         }
 

@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using Discord.Webhook;
+using NLog.Fluent;
 
 namespace KothPlugin
 {
@@ -20,13 +23,28 @@ namespace KothPlugin
 
         private KothPlugin.Koth Plugin { get; }
         
-        private void SaveButton_OnClick(object sender, RoutedEventArgs e) {
-            Plugin.Save();
+        private void RefreshPathButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Koth.SetPath();
         }
 
-        private void TestButton_OnClick(object sender, RoutedEventArgs e)
+        private void TestWebHookButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //
+            using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
+            { 
+                client.SendMessageAsync("Successful WebHook Test");
+            }
+        }
+        
+        private void ClearScoresButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Log.Info("Scores have been Cleared");
+            NetworkService.SendPacket("clear");
+        }
+        
+        private void UpdateConfigButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Plugin.Save();
         }
     }
 }
