@@ -8,8 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50d477c8-73d0-4654-b4db-fb859e0b33e4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_09_PM_[Default_Changelist]/KothPlugin.csprojAssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_09_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_09_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_37_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_37_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_12_2021_12_51_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_12_2021_12_51_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_16_2021_8_24_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_16_2021_8_24_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_38_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_38_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KothPlugin/DiscordService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KothPlugin/DiscordService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPlugin.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPlugin.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPluginControl.baml" beforeDir="false" afterPath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPluginControl.baml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +42,15 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9629EE5E-20A1-4817-9632-1023E1F9F99A/70/63221ead/EmbedBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9629EE5E-20A1-4817-9632-1023E1F9F99A/fb/dbda8618/Color.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KothPlugin/WebService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/KothPluginControl.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/KothPluginControl.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/Koth.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/KothPluginControl.xaml.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/KothPlugin/Server.cs" />
-      <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.cs" />
       <option value="$APPLICATION_CONFIG_DIR$/scratches/testy.js" />
       <option value="$PROJECT_DIR$/KothPlugin/koth.html" />
       <option value="$APPLICATION_CONFIG_DIR$/scratches/yes.html" />
@@ -47,8 +61,12 @@
       <option value="$PROJECT_DIR$/KothPlugin/WebService.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/NetworkService.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/KothConfig.cs" />
-      <option value="$PROJECT_DIR$/KothPlugin/Koth.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/DiscordService.cs" />
+      <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.cs" />
+      <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.cs" />
+      <option value="$PROJECT_DIR$/KothPlugin/Koth.cs" />
+      <option value="$PROJECT_DIR$/KothPlugin/KothPluginControl.xaml.cs" />
+      <option value="$PROJECT_DIR$/KothPlugin/KothPluginControl.xaml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1mukRufKkf0CY8tTItr5dnaCqMQ" />
@@ -119,7 +137,9 @@
       <workItem from="1610831923309" duration="10215000" />
       <workItem from="1610902942136" duration="8993000" />
       <workItem from="1610917366883" duration="4180000" />
-      <workItem from="1610922304697" duration="2778000" />
+      <workItem from="1610922304697" duration="4814000" />
+      <workItem from="1611095005237" duration="3602000" />
+      <workItem from="1611200756749" duration="3864000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1610360448356</created>
@@ -352,7 +372,35 @@
       <option name="project" value="LOCAL" />
       <updated>1610922437247</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="??">
+      <created>1610931544505</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1610931544505</updated>
+    </task>
+    <task id="LOCAL-00035" summary="?">
+      <created>1611201051437</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1611201051437</updated>
+    </task>
+    <task id="LOCAL-00036" summary="?">
+      <created>1611203001211</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1611203001211</updated>
+    </task>
+    <task id="LOCAL-00037" summary="??">
+      <created>1611204585936</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1611204585936</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,9 +445,29 @@
     <MESSAGE value="." />
     <MESSAGE value=":fire:" />
     <MESSAGE value=":bug:" />
-    <MESSAGE value="??" />
     <MESSAGE value=".." />
     <MESSAGE value="?" />
-    <option name="LAST_COMMIT_MESSAGE" value="?" />
+    <MESSAGE value="??" />
+    <option name="LAST_COMMIT_MESSAGE" value="??" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch.cs</url>
+          <line>6</line>
+          <properties documentPath="C:\Users\Tails\AppData\Roaming\JetBrains\Rider2020.3\scratches\scratch.cs" initialLine="6" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

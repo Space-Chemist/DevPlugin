@@ -113,7 +113,7 @@
             <Popup x:Name="tooltip" PlacementTarget="{Binding ElementName=bttnTarget}" MouseLeave="bttnTarget_MouseLeave" Placement="Bottom">
                 <StackPanel>
                     <TextBlock>
-                        <Hyperlink NavigateUri="https://www.color-hex.com/">https://www.color-hex.com/</Hyperlink>
+                        <Hyperlink NavigateUri="https://www.color-hex.com/" TargetName="_top">https://www.color-hex.com/</Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </Popup>
