@@ -104,10 +104,20 @@
         </Grid>
         
         <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">
+            <Button x:Name="bttnTarget" MouseEnter="bttnTarget_MouseEnter" Content="Click..!!" Height="23" HorizontalAlignment="Left" Margin="191,108,0,0" VerticalAlignment="Top" Width="75" />
             <Button  Content="Refresh Path" Margin="5" Click="RefreshPathButton_OnClick" />
             <Button  Content="Test WebHook" Margin="5" Click="TestWebHookButton_OnClick" />
             <Button  Content="Clear Scores" Margin="5" Click="ClearScoresButton_OnClick" />
             <Button  Content="Update Config" Margin="5" Click="UpdateConfigButton_OnClick" />
+            
+            <Popup x:Name="tooltip" PlacementTarget="{Binding ElementName=bttnTarget}" MouseLeave="bttnTarget_MouseLeave" Placement="Bottom">
+                <StackPanel>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://www.color-hex.com/">https://www.color-hex.com/</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Popup>
+            
         </StackPanel>
     </Grid>
 </UserControl>

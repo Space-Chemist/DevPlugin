@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Discord.Webhook;
 using NLog;
 using NLog.Fluent;
@@ -25,6 +26,15 @@ namespace KothPlugin
         }
 
         private KothPlugin.Koth Plugin { get; }
+        
+        private void bttnTarget_MouseLeave(object sender, MouseEventArgs e)
+        {
+            tooltip.IsOpen = false;
+        }
+        private void bttnTarget_MouseEnter(object sender, MouseEventArgs e)
+        {
+            tooltip.IsOpen = true;
+        }
         
         private void RefreshPathButton_OnClick(object sender, RoutedEventArgs e)
         {
