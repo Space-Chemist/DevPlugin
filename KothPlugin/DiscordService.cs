@@ -8,43 +8,52 @@ namespace KothPlugin
     public class DiscordService
     {
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         public static async void SendDiscordWebHook(string msg)
         {
-            if (!string.IsNullOrEmpty(Koth.Instance.Config.WebHookUrl) && Koth.Instance.Config.WebHookEnabled)
+            if (!Koth.Instance.Config.WebHookEnabled)
             {
-                if (!string.IsNullOrEmpty(Koth.Instance.Config.MessagePrefix))
-                {
-                    msg = $"{Koth.Instance.Config.MessagePrefix} {msg}";
-                }
+                return;
+            }
 
-                if (Koth.Instance.Config.EmbedEnabled)
+
+            if (string.IsNullOrEmpty(Koth.Instance.Config.WebHookUrl))
+            {
+                Log.Error("discord Webhook is enabled but the Webhook url is empty? you should fix that!");
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(Koth.Instance.Config.MessagePrefix))
+            {
+                msg = $"{Koth.Instance.Config.MessagePrefix} {msg}";
+            }
+
+            try
+            {
+                using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
                 {
-                    
-                    var embed = new EmbedBuilder
+                    if (Koth.Instance.Config.EmbedEnabled)
                     {
-                        Title = Koth.Instance.Config.EmbedTitle,
-                        Color = new Color(Convert.ToUInt32(Koth.Instance.Config.Color.Replace("#", ""), 16)),
-                        Description = msg
-                    };
-                
-                    using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
-                    {
+                        var embed = new EmbedBuilder
+                        {
+                            Title = Koth.Instance.Config.EmbedTitle,
+                            Color = new Color(Convert.ToUInt32(Koth.Instance.Config.Color.Replace("#", ""), 16)),
+                            Description = msg
+                        };
+
                         await client.SendMessageAsync("", embeds: new[] {embed.Build()});
                     }
-                }
-                else
-                {
-                    using (var client = new DiscordWebhookClient(Koth.Instance.Config.WebHookUrl))
+                    else
                     {
                         await client.SendMessageAsync(msg);
                     }
                 }
             }
-            else
+
+            catch (Exception e)
             {
-                Log.Warn("WebHook Url empty and is required");
+                Log.Error(e, "discord Webhook is most likely bad or discord is down");
             }
-            
         }
     }
 }
