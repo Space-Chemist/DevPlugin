@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NLog;
-using Torch;
 
 namespace KothPlugin
 {

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d">
+    
     <Grid x:Name="Main">
         
         <Grid.ColumnDefinitions>
@@ -33,6 +34,7 @@
         
         <!--Left Grid area Webserver enabled -->
         <Grid x:Name="WebServerGrid" Grid.Column="0" Grid.Row="2">
+            <!--visibility control binded to WebServerEnalbed\\ used to collapsed WebServerGrid when not checked-->
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -57,27 +59,28 @@
             
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="0" VerticalAlignment="Center" Text="API Enabled" Margin="5"/> 
-                <CheckBox Name="ApiEnabled" Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding ApiEnabled}"/>
+                <CheckBox x:Name="ApiEnabled" Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding ApiEnabled}"/>
             </StackPanel>
             
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="1" VerticalAlignment="Center" Text="Web Page Enabled" Margin="5"/> 
-                <CheckBox Name="WebPageEnabled" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebPageEnabled}"/>
+                <CheckBox x:Name="WebPageEnabled" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebPageEnabled}"/>
             </StackPanel>
             
             <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="2" VerticalAlignment="Center" Text="Host" Margin="5"/> 
-                <TextBox Name="Host" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Host}"/> 
+                <TextBox x:Name="Host" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Host}"/> 
             </StackPanel>
             
             <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="3" VerticalAlignment="Center" Text="Port" Margin="5"/> 
-                <TextBox Name="Port" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Port}"/>
+                <TextBox x:Name="Port" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Port}"/>
             </StackPanel>
             
         </Grid>
         <!--Right Grid area Webhook Enabled-->
-        <Grid Grid.Row="2" Grid.Column="2">
+        <Grid x:Name="WebHookGrid" Grid.Row="2" Grid.Column="2">
+            <!--visibility control binded to WebHookEnalbed\\ used to collapsed WebHookGrid when not checked-->
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -103,20 +106,20 @@
             
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="0" VerticalAlignment="Center" Text="Embed Enabled" Margin="5"/>
-                <CheckBox Name="EmbedEnabled" Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding EmbedEnabled}"/>
+                <CheckBox x:Name="EmbedEnabled" Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding EmbedEnabled}"/>
             </StackPanel>
             
             <TextBlock Grid.Column="0" Grid.Row ="1" VerticalAlignment="Center" Text="WebHook Url" Margin="5"/>
-            <TextBox Name="WebHookUrl" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding WebHookUrl}"/> 
+            <TextBox x:Name="WebHookUrl" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding WebHookUrl}"/> 
             
             <TextBlock Grid.Column="0" Grid.Row ="2" VerticalAlignment="Center" Text="MessagePrefix" Margin="5"/>
-            <TextBox Name="MessagePrefix" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding MessagePrefix}"/> 
+            <TextBox x:Name="MessagePrefix" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding MessagePrefix}"/> 
             
             <TextBlock Grid.Column="0" Grid.Row ="3" VerticalAlignment="Center" ToolTip="https://www.color-hex.com/" Text="Color" Margin="5"/>
-            <TextBox Name="Color" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Color}"/>
+            <TextBox x:Name="Color" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Color}"/>
             
             <TextBlock Grid.Column="0" Grid.Row ="4" VerticalAlignment="Center" Text="EmbedTitle" Margin="5"/>
-            <TextBox Name="EmbedTitle" Grid.Column="1" Grid.Row ="4" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding EmbedTitle}"/>
+            <TextBox x:Name="EmbedTitle" Grid.Column="1" Grid.Row ="4" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding EmbedTitle}"/>
             
         </Grid>
         

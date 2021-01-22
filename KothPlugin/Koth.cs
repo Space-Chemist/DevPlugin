@@ -1,14 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
-using Discord;
-using Discord.Webhook;
 using NLog;
 using Sandbox;
-using Sandbox.ModAPI;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;

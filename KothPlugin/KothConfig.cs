@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using Torch;
+﻿using Torch;
 using ProtoBuf; 
 
 namespace KothPlugin
@@ -23,7 +22,18 @@ namespace KothPlugin
         public bool WebServerEnabled
         {
             get => _webserverenabled;
-            set => SetValue(ref _webserverenabled, value);
+            set
+            {
+                SetValue(ref _webserverenabled, value);
+                if (!_webserverenabled)
+                {
+                    WebService.StartWebServer();
+                }
+                else
+                {
+                    WebService.StopWebServer();
+                }
+            }
         }
 
         public string EmbedTitle
