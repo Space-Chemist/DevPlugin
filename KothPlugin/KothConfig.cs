@@ -37,7 +37,9 @@ namespace KothPlugin
         {
             if (_webserverenabled)
             {
-                WebService.StartWebServer();
+                if (Koth.SessionManager.CurrentSession !=null){
+                    WebService.StartWebServer();
+                }
             }
             else
             {

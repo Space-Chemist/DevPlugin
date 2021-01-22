@@ -22,7 +22,7 @@ namespace KothPlugin
         public static string KothScorePath = "";
         private Persistent<KothPluginConfig> _config;
         private KothPluginControl _control;
-        private static TorchSessionManager _sessionManager;
+        public static TorchSessionManager SessionManager;
         public KothPluginConfig Config => _config?.Data;
 
         public UserControl GetControl()
@@ -35,8 +35,8 @@ namespace KothPlugin
             base.Init(torch);
             SetupConfig();
             Instance = this;
-            _sessionManager = Torch.Managers.GetManager<TorchSessionManager>();
-            _sessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
+            SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
+            SessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
             
         }
 
@@ -87,7 +87,7 @@ namespace KothPlugin
 
         public static void SetPath()
         {
-            if (_sessionManager.CurrentSession !=null)
+            if (SessionManager.CurrentSession !=null)
             {
                 var kothScoreName = MySandboxGame.ConfigDedicated.LoadWorld;
                 KothScorePath = Path.Combine(kothScoreName, @"Storage\2002161364.sbm_NewKoth\Scores.data");
