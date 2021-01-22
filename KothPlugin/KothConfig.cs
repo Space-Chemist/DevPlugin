@@ -19,16 +19,59 @@ namespace KothPlugin
         private string _embedtitle = "";
         private int _port = 8888;
 
-        public bool WebPageEnabled
+        public bool WebHookEnabled
         {
-            get => _webpageenabled;
-            set => SetValue(ref _webpageenabled, value);
+            get => _webhookenabled; 
+            set => SetValue(ref _webhookenabled, value);
         }
+        
         public bool WebServerEnabled
         {
             get => _webserverenabled;
             set => SetValue(ref _webserverenabled, value);
             
+        }
+        
+        public bool EmbedEnabled
+        {
+            get => _embedenabled;
+            set => SetValue(ref _embedenabled, value);
+        }
+        
+        public bool ApiEnabled
+        {
+            get => _apienabled;
+            set => SetValue(ref _apienabled, value);
+        }
+        
+        public bool WebPageEnabled
+        {
+            get => _webpageenabled;
+            set => SetValue(ref _webpageenabled, value);
+        }
+        
+        public string WebHookUrl
+        {
+            get => _webhookUrl; 
+            set => SetValue(ref _webhookUrl, value);
+        }
+        
+        public string Host
+        {
+            get => _host;
+            set => SetValue(ref _host, value);
+        }
+        
+        public string MessagePrefix
+        {
+            get => _messageprefix;
+            set => SetValue(ref _messageprefix, value);
+        }
+        
+        public string Color
+        {
+            get => _color;
+            set => SetValue(ref _color, value);
         }
 
         public string EmbedTitle
@@ -36,39 +79,6 @@ namespace KothPlugin
             get => _embedtitle;
             set => SetValue(ref _embedtitle, value);
         }
-
-        public bool EmbedEnabled
-        {
-            get => _embedenabled;
-            set => SetValue(ref _embedenabled, value);
-        }
-
-
-        public string Color
-        {
-            get => _color;
-            set => SetValue(ref _color, value);
-        }
-
-        public string MessagePrefix
-        {
-            get => _messageprefix;
-            set => SetValue(ref _messageprefix, value);
-        }
-        public string Host
-        {
-            get => _host;
-            set => SetValue(ref _host, value);
-        }
-
-        public bool WebHookEnabled { get => _webhookenabled; set => SetValue(ref _webhookenabled, value); }
-        public bool ApiEnabled
-        {
-            get => _apienabled;
-            set => SetValue(ref _apienabled, value);
-        }
-
-        public string WebHookUrl { get => _webhookUrl; set => SetValue(ref _webhookUrl, value); }
 
         public int Port
         {
