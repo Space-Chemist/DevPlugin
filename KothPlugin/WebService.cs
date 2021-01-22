@@ -23,27 +23,43 @@ namespace KothPlugin
 
         public static void StartWebServer()
         {
-            if (_mainLoop != null && !_mainLoop.IsCompleted) return;
-            _mainLoop = ServerLoop();
-            Log.Warn("Web server started");
+            if (Koth.Instance.Config.WebServerEnabled)
+            {
+                try
+                {
+                    if (_mainLoop != null && !_mainLoop.IsCompleted) return;
+                    _mainLoop = ServerLoop();
+                    Log.Warn("Web server started");
+
+                }
+                catch (Exception error)
+                {
+                    Log.Error(error, "Server error");
+                }
+                
+            }    
+            
         }
 
         public static void StopWebServer()
         {
-            Log.Warn("Web server stoped");
-            _keepGoing = false;
-            lock (Listener)
+            if (!Koth.Instance.Config.WebServerEnabled)
             {
-                Listener.Stop();
-            }
+                Log.Warn("Web server stoped");
+                _keepGoing = false;
+                lock (Listener)
+                {
+                    Listener.Stop();
+                }
 
-            try
-            {
-                _mainLoop.Wait();
-            }
-            catch (Exception error)
-            {
-                Log.Error(error, "Server error");
+                try
+                {
+                    _mainLoop.Wait();
+                }
+                catch (Exception error)
+                {
+                    Log.Error(error, "Server error");
+                }
             }
         }
 
