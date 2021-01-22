@@ -110,7 +110,7 @@
             </StackPanel>
             
             <TextBlock Grid.Column="0" Grid.Row ="1" VerticalAlignment="Center" Text="WebHook Url" Margin="5"/>
-            <TextBox x:Name="WebHookUrl" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding WebHookUrl}"/> 
+            <TextBox x:Name="WebHookUrl" ToolTip="Discord webhook URl for more info see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding WebHookUrl}"/> 
             
             <TextBlock Grid.Column="0" Grid.Row ="2" VerticalAlignment="Center" Text="MessagePrefix" Margin="5"/>
             <TextBox x:Name="MessagePrefix" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding MessagePrefix}"/> 
