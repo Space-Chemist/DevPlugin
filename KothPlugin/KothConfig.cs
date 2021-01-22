@@ -21,18 +21,26 @@ namespace KothPlugin
         
         public bool WebServerEnabled
         {
-            get => _webserverenabled;
+            get { return _webserverenabled; }
             set
             {
-                SetValue(ref _webserverenabled, value);
-                if (!_webserverenabled)
+                if (_webserverenabled != value)
                 {
-                    WebService.StartWebServer();
-                }
-                else
-                {
-                    WebService.StopWebServer();
-                }
+                    UpdateWebServerState();
+                }    
+            }
+            
+        }
+
+        private void UpdateWebServerState()
+        {
+            if (_webserverenabled)
+            {
+                WebService.StartWebServer();
+            }
+            else
+            {
+                WebService.StopWebServer();
             }
         }
 

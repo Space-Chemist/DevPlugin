@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using NLog;
@@ -12,13 +13,21 @@ namespace KothPlugin
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class KothPluginControl : UserControl
+    public partial class KothPluginControl : INotifyPropertyChanged
     {
         
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public KothPluginControl()
         {
             InitializeComponent();
+            OnPropertyChanged();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 

@@ -99,7 +99,7 @@ namespace KothPlugin
             }
             
         }
-        
+
         public static session ScoresFromStorage()
         {
             var serializer = new XmlSerializer(typeof(session));

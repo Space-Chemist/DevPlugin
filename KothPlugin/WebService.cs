@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NLog;
+using NLog.Fluent;
 
 namespace KothPlugin
 {
@@ -24,10 +25,12 @@ namespace KothPlugin
         {
             if (_mainLoop != null && !_mainLoop.IsCompleted) return;
             _mainLoop = ServerLoop();
+            Log.Warn("Web server started");
         }
 
         public static void StopWebServer()
         {
+            Log.Warn("Web server stoped");
             _keepGoing = false;
             lock (Listener)
             {
