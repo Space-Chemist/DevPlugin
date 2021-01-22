@@ -55,6 +55,7 @@ namespace KothPlugin
                 try
                 {
                     _mainLoop.Wait();
+                    _keepGoing = true;
                 }
                 catch (Exception error)
                 {
