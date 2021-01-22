@@ -21,30 +21,9 @@ namespace KothPlugin
         
         public bool WebServerEnabled
         {
-            get { return _webserverenabled; }
-            set
-            {
-                SetValue(ref _webserverenabled, value);
-                if (_webserverenabled != value)
-                {
-                    UpdateWebServerState();
-                }    
-            }
+            get => _webserverenabled;
+            set => SetValue(ref _webserverenabled, value);
             
-        }
-
-        private void UpdateWebServerState()
-        {
-            if (_webserverenabled)
-            {
-                if (Koth.SessionManager.CurrentSession !=null){
-                    WebService.StartWebServer();
-                }
-            }
-            else
-            {
-                WebService.StopWebServer();
-            }
         }
 
         public string EmbedTitle

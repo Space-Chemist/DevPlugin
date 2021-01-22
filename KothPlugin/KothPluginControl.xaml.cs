@@ -13,21 +13,13 @@ namespace KothPlugin
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class KothPluginControl : INotifyPropertyChanged
+    public partial class KothPluginControl : UserControl
     {
         
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public KothPluginControl()
         {
             InitializeComponent();
-            OnPropertyChanged();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 
@@ -64,44 +56,17 @@ namespace KothPlugin
             Plugin.Save();
         }
         
-        public class KothPluginControlViewModel : INotifyDataErrorInfo
+        private void WebServerUpdate_OnClick(object sender, RoutedEventArgs e)
         {
-            private readonly Dictionary<string, string> _validationErrors = new Dictionary<string, string>();
-
-            public void Validate()
+            if (WebServerEnabled == true)
             {
-                bool isValid = !string.IsNullOrEmpty(_text);
-                bool contains = _validationErrors.ContainsKey(nameof(Text));
-                if (!isValid && !contains)
-                    _validationErrors.Add(nameof(Text), "Mandatory field!");
-                else if (isValid && contains)
-                    _validationErrors.Remove(nameof(Text));
-
-                if (ErrorsChanged != null)
-                    ErrorsChanged(this, new DataErrorsChangedEventArgs(nameof(Text)));
-            }
-
-            public bool HasErrors => _validationErrors.Count > 0;
-
-            public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-            public IEnumerable GetErrors(string propertyName)
-            {
-                string message;
-                if (_validationErrors.TryGetValue(propertyName, out message))
-                    return new List<string> { message };
-
-                return null;
-            }
-
-            private string _text;
-            public string Text
-            {
-                get { return _text; }
-                set
-                {
-                    _text = value; 
+                if (Koth.SessionManager.CurrentSession !=null){
+                    WebService.StartWebServer();
                 }
+            }
+            else
+            {
+                WebService.StopWebServer();
             }
         }
 
