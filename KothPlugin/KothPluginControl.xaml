@@ -29,7 +29,7 @@
         
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <TextBlock  VerticalAlignment="Center" Text="Web Server Enabled" Margin="5"/>
-            <CheckBox x:Name="WebServerEnabled"  HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebServerEnabled}"/>
+            <CheckBox x:Name="CWebServerEnabled"  HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebServerEnabled}"/>
         </StackPanel>
         
         <!--Left Grid area Webserver enabled -->
@@ -39,7 +39,7 @@
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsChecked,ElementName=WebServerEnabled}" Value="True">
+                        <DataTrigger Binding="{Binding IsChecked,ElementName=CWebServerEnabled}" Value="True">
                             <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
