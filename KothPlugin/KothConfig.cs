@@ -24,6 +24,7 @@ namespace KothPlugin
             get { return _webserverenabled; }
             set
             {
+                SetValue(ref _webserverenabled, value);
                 if (_webserverenabled != value)
                 {
                     UpdateWebServerState();
