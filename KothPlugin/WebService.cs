@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 using NLog;
 
@@ -20,14 +21,31 @@ namespace KothPlugin
 
         private static Task _mainLoop;
 
+        private static bool _running = false;
+
         public static void StartWebServer()
         {
             if (Koth.Instance.Config.WebServerEnabled)
             {
                 try
                 {
-                    if (_mainLoop != null && !_mainLoop.IsCompleted) return;
-                    _mainLoop = ServerLoop();
+                    //check needs refined
+                    if (!_running)
+                    {
+                        try
+                        {
+                            if (_mainLoop != null && !_mainLoop.IsCompleted) return;
+                            _mainLoop = ServerLoop();
+                            _running = true;
+
+                        }
+                        catch (Exception error)
+                        {
+                            Log.Error(error, "Server error");
+                        }
+
+                        _running = false;
+                    }
 
                 }
                 catch (Exception error)
@@ -43,21 +61,36 @@ namespace KothPlugin
         {
             if (!Koth.Instance.Config.WebServerEnabled)
             {
-                _keepGoing = false;
-                lock (Listener)
-                {
-                    Listener.Stop();
-                }
-
                 try
                 {
-                    _mainLoop.Wait();
-                    _keepGoing = true;
+                    //check needs refined
+                    if (_running)
+                    {
+                        _keepGoing = false;
+                        lock (Listener)
+                        {
+                            Listener.Stop();
+                            _running = false;
+                        }
+
+                        try
+                        {
+                            _mainLoop.Wait();
+                            _keepGoing = true;
+                        }
+                        catch (Exception error)
+                        {
+                            Log.Error(error, "Server error");
+                        }
+                    }
+
                 }
                 catch (Exception error)
                 {
                     Log.Error(error, "Server error");
                 }
+                
+
             }
         }
 
