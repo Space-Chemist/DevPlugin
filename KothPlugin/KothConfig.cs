@@ -11,14 +11,19 @@ namespace KothPlugin
         private bool _webserverenabled = true;
         private bool _embedenabled = true;
         private bool _apienabled = true;
+        private bool _webpageenabled = true;
         private string _webhookUrl = "";
         private string _host = "localhost";
         private string _messageprefix = "";
         private string _color = "#8b1f5e";
         private string _embedtitle = "";
         private int _port = 8888;
-        
-        
+
+        public bool WebPageEnabled
+        {
+            get => _webpageenabled;
+            set => SetValue(ref _webpageenabled, value);
+        }
         public bool WebServerEnabled
         {
             get => _webserverenabled;
