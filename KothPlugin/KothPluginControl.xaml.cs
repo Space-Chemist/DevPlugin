@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,23 +21,16 @@ namespace KothPlugin
         {
             InitializeComponent();
         }
-        
+
+
         public KothPluginControl(Koth plugin) : this() {
             Plugin = plugin;
             DataContext = plugin.Config;
         }
 
         private KothPlugin.Koth Plugin { get; }
-        
-        private void bttnTarget_MouseLeave(object sender, MouseEventArgs e)
-        {
-            tooltip.IsOpen = false;
-        }
-        private void bttnTarget_MouseEnter(object sender, MouseEventArgs e)
-        {
-            tooltip.IsOpen = true;
-        }
-        
+
+
         private void RefreshPathButton_OnClick(object sender, RoutedEventArgs e)
         {
             Log.Info("Path Refresh");

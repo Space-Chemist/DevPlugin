@@ -23,19 +23,26 @@
         
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="WebHook Enabled" Margin="5" />
-            <CheckBox Name="WebHookEnabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=WebHookEnabled}"/>
+            <CheckBox x:Name="WebHookEnabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=WebHookEnabled}"/>
         </StackPanel>
         
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <TextBlock  VerticalAlignment="Center" Text="Web Server Enabled" Margin="5"/>
-            <CheckBox Name="WebServerEnabled"  HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebServerEnabled}"/>
+            <CheckBox x:Name="WebServerEnabled"  HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebServerEnabled}"/>
         </StackPanel>
         
         <!--Left Grid area Webserver enabled -->
-        <Grid Grid.Column="0" Grid.Row="2" >
-            
-            
-            
+        <Grid x:Name="WebServerGrid" Grid.Column="0" Grid.Row="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked,ElementName=WebServerEnabled}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -60,17 +67,27 @@
             
             <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="2" VerticalAlignment="Center" Text="Host" Margin="5"/> 
-                <TextBox Name="Host" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding Host}"/> 
+                <TextBox Name="Host" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Host}"/> 
             </StackPanel>
             
             <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="3" VerticalAlignment="Center" Text="Port" Margin="5"/> 
-                <TextBox Name="Port" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding Port}"/>
+                <TextBox Name="Port" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Port}"/>
             </StackPanel>
             
         </Grid>
         <!--Right Grid area Webhook Enabled-->
         <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked,ElementName=WebHookEnabled}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -90,34 +107,24 @@
             </StackPanel>
             
             <TextBlock Grid.Column="0" Grid.Row ="1" VerticalAlignment="Center" Text="WebHook Url" Margin="5"/>
-            <TextBox Name="WebHookUrl" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="2" MinWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding WebHookUrl}"/> 
+            <TextBox Name="WebHookUrl" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding WebHookUrl}"/> 
             
             <TextBlock Grid.Column="0" Grid.Row ="2" VerticalAlignment="Center" Text="MessagePrefix" Margin="5"/>
-            <TextBox Name="MessagePrefix" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding MessagePrefix}"/> 
+            <TextBox Name="MessagePrefix" Grid.Column="1" Grid.Row ="2" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding MessagePrefix}"/> 
             
-            <TextBlock Grid.Column="0" Grid.Row ="3" VerticalAlignment="Center" Text="Color" Margin="5"/>
-            <TextBox Name="Color" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding Color}"/>
+            <TextBlock Grid.Column="0" Grid.Row ="3" VerticalAlignment="Center" ToolTip="https://www.color-hex.com/" Text="Color" Margin="5"/>
+            <TextBox Name="Color" Grid.Column="1" Grid.Row ="3" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding Color}"/>
             
             <TextBlock Grid.Column="0" Grid.Row ="4" VerticalAlignment="Center" Text="EmbedTitle" Margin="5"/>
-            <TextBox Name="EmbedTitle" Grid.Column="1" Grid.Row ="4" Grid.ColumnSpan="2" MinWidth="120" VerticalAlignment="Stretch" Margin="5" Text="{Binding EmbedTitle}"/>
+            <TextBox Name="EmbedTitle" Grid.Column="1" Grid.Row ="4" Grid.ColumnSpan="2" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding EmbedTitle}"/>
             
         </Grid>
         
         <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">
-            <Button x:Name="bttnTarget" MouseEnter="bttnTarget_MouseEnter" Content="Click..!!" Height="23" HorizontalAlignment="Left" Margin="191,108,0,0" VerticalAlignment="Top" Width="75" />
             <Button  Content="Refresh Path" Margin="5" Click="RefreshPathButton_OnClick" />
             <Button  Content="Test WebHook" Margin="5" Click="TestWebHookButton_OnClick" />
             <Button  Content="Clear Scores" Margin="5" Click="ClearScoresButton_OnClick" />
             <Button  Content="Update Config" Margin="5" Click="UpdateConfigButton_OnClick" />
-            
-            <Popup x:Name="tooltip" PlacementTarget="{Binding ElementName=bttnTarget}" MouseLeave="bttnTarget_MouseLeave" Placement="Bottom">
-                <StackPanel>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://www.color-hex.com/" TargetName="_top">https://www.color-hex.com/</Hyperlink>
-                    </TextBlock>
-                </StackPanel>
-            </Popup>
-            
         </StackPanel>
     </Grid>
 </UserControl>
