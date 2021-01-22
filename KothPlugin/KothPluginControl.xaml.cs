@@ -58,7 +58,7 @@ namespace KothPlugin
         
         private void WebServerUpdate_OnClick(object sender, RoutedEventArgs e)
         {
-            if (!Koth.Instance.Config.WebServerEnabled)
+            if (Koth.Instance.Config.WebServerEnabled)
             {
                 if (Koth.SessionManager.CurrentSession !=null){
                     WebService.StartWebServer();
@@ -66,7 +66,9 @@ namespace KothPlugin
             }
             else
             {
-                WebService.StopWebServer();
+                if (Koth.SessionManager.CurrentSession !=null){
+                    WebService.StopWebServer();
+                }
             }
         }
 

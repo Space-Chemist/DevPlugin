@@ -29,7 +29,7 @@
         
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <TextBlock  VerticalAlignment="Center" Text="Web Server Enabled" Margin="5"/>
-            <CheckBox x:Name="CWebServerEnabled"  HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebServerEnabled}"/>
+            <CheckBox x:Name="CWebServerEnabled" Click="WebServerUpdate_OnClick" HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebServerEnabled}"/>
         </StackPanel>
         
         <!--Left Grid area Webserver enabled -->
@@ -64,7 +64,7 @@
             
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Grid.Column="0" Grid.Row ="1" VerticalAlignment="Center" Text="Web Page Enabled" Margin="5"/> 
-                <CheckBox x:Name="WebPageEnabled" Click="WebServerUpdate_OnClick" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebPageEnabled}"/>
+                <CheckBox x:Name="WebPageEnabled" Grid.Column="1" Grid.Row ="1" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding WebPageEnabled}"/>
             </StackPanel>
             
             <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
