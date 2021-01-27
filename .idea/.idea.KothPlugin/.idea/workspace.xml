@@ -14,10 +14,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_37_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_11_2021_10_37_PM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_12_2021_12_51_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_12_2021_12_51_AM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_16_2021_8_24_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_16_2021_8_24_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_16_2021_8_24_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_16_2021_8_24_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM_[Default_Changelist]/KothPlugin.csprojAssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_12_06_PM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_38_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_38_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM_[Default_Changelist]/KothPlugin.csprojAssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/shelf/Uncommitted_changes_before_Update_at_1_17_2021_3_56_PM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KothPlugin/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPlugin.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPlugin.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPluginControl.baml" beforeDir="false" afterPath="$PROJECT_DIR$/KothPlugin/obj/Debug/KothPluginControl.baml" afterDir="false" />
@@ -37,36 +42,37 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/KothPlugin/obj/Debug/KothPluginControl.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9629EE5E-20A1-4817-9632-1023E1F9F99A/70/63221ead/EmbedBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9629EE5E-20A1-4817-9632-1023E1F9F99A/fb/dbda8618/Color.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/KothPlugin/WebService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/KothPluginControl.xaml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/KothPluginControl.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/Koth.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KothPlugin/WebService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/WebService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/KothPluginControl.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Tails/RiderProjects/DevPlugin/KothPlugin/DiscordService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/KothPlugin/Server.cs" />
       <option value="$APPLICATION_CONFIG_DIR$/scratches/testy.js" />
-      <option value="$PROJECT_DIR$/KothPlugin/koth.html" />
-      <option value="$APPLICATION_CONFIG_DIR$/scratches/yes.html" />
       <option value="$PROJECT_DIR$/KothPlugin/Xmlservice.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/ModNetworkAPI/Network.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/ModNetworkAPI/Server.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/KothCommands.cs" />
-      <option value="$PROJECT_DIR$/KothPlugin/WebService.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/NetworkService.cs" />
-      <option value="$PROJECT_DIR$/KothPlugin/KothConfig.cs" />
-      <option value="$PROJECT_DIR$/KothPlugin/DiscordService.cs" />
       <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.cs" />
       <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.cs" />
-      <option value="$PROJECT_DIR$/KothPlugin/Koth.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/KothPluginControl.xaml.cs" />
       <option value="$PROJECT_DIR$/KothPlugin/KothPluginControl.xaml" />
+      <option value="$PROJECT_DIR$/KothPlugin/KothConfig.cs" />
+      <option value="$PROJECT_DIR$/KothPlugin/DiscordService.cs" />
+      <option value="$PROJECT_DIR$/KothPlugin/Koth.cs" />
+      <option value="$PROJECT_DIR$/KothPlugin/koth.html" />
+      <option value="$APPLICATION_CONFIG_DIR$/scratches/yes.html" />
+      <option value="$PROJECT_DIR$/KothPlugin/WebService.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1mukRufKkf0CY8tTItr5dnaCqMQ" />
@@ -140,6 +146,11 @@
       <workItem from="1610922304697" duration="4814000" />
       <workItem from="1611095005237" duration="3602000" />
       <workItem from="1611200756749" duration="3864000" />
+      <workItem from="1611296482791" duration="1856000" />
+      <workItem from="1611355717059" duration="6585000" />
+      <workItem from="1611378016142" duration="3797000" />
+      <workItem from="1611443579796" duration="22000" />
+      <workItem from="1611720376409" duration="4016000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1610360448356</created>
@@ -400,7 +411,49 @@
       <option name="project" value="LOCAL" />
       <updated>1611204585936</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="?">
+      <created>1611294085402</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1611294085402</updated>
+    </task>
+    <task id="LOCAL-00039" summary="?">
+      <created>1611296596675</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1611296596675</updated>
+    </task>
+    <task id="LOCAL-00040" summary="?">
+      <created>1611296641635</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1611296641635</updated>
+    </task>
+    <task id="LOCAL-00041" summary="was i high?">
+      <created>1611356725912</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1611356725912</updated>
+    </task>
+    <task id="LOCAL-00042" summary="?">
+      <created>1611720453461</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1611720453461</updated>
+    </task>
+    <task id="LOCAL-00043" summary="yes">
+      <created>1611724080913</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1611724080913</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +487,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="fix" />
     <MESSAGE value="gh" />
-    <MESSAGE value="yes" />
     <MESSAGE value="lolol" />
     <MESSAGE value="???" />
     <MESSAGE value="..." />
@@ -446,9 +498,11 @@
     <MESSAGE value=":fire:" />
     <MESSAGE value=":bug:" />
     <MESSAGE value=".." />
-    <MESSAGE value="?" />
     <MESSAGE value="??" />
-    <option name="LAST_COMMIT_MESSAGE" value="??" />
+    <MESSAGE value="was i high?" />
+    <MESSAGE value="?" />
+    <MESSAGE value="yes" />
+    <option name="LAST_COMMIT_MESSAGE" value="yes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
