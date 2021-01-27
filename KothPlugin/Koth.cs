@@ -95,7 +95,7 @@ namespace KothPlugin
             }
             else
             {
-                Log.Error("Session not Loaded, cannot set path ");
+                Log.Error("No Current session Loaded, cannot set koth score data path");
             }
             
         }

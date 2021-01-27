@@ -43,13 +43,13 @@ namespace KothPlugin
 
                         await client.SendMessageAsync("", embeds: new[] {embed.Build()});
                     }
+                    
                     else
                     {
                         await client.SendMessageAsync(msg);
                     }
                 }
             }
-
             catch (Exception e)
             {
                 Log.Error(e, "discord Webhook is most likely bad or discord is down");
