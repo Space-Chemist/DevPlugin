@@ -8,19 +8,19 @@ namespace KothPlugin
     [XmlRoot(ElementName = "Session")]
     public class session
     {
-        [XmlElement("WorldScores")] public List<WorldScores> WorldScores { get; set; }
+        [XmlElement("PlanetScores")] public List<PlanetScores> PlanetScores { get; set; }
     }
 
     [Serializable()]
-    [XmlRoot(ElementName = "WorldScores")]
-    public class WorldScores
+    [XmlRoot(ElementName = "PlanetScores")]
+    public class PlanetScores
     {
-        [XmlElement] public List<WorldDescription> WorldDescription { get; set; }
+        [XmlElement] public List<PlanetDescription> PlanetDescription { get; set; }
     }
 
     [Serializable()]
-    [XmlRoot(ElementName = "WorldDescription")]
-    public class WorldDescription
+    [XmlRoot(ElementName = "PlanetDescription")]
+    public class PlanetDescription
     {
         [XmlElement] public string Name { get; set; }
         [XmlElement] public List<Scores> Scores { get; set; }
