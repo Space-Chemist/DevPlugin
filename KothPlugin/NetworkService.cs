@@ -18,9 +18,12 @@ namespace KothPlugin
         {
             try
             {
-                var message = Encoding.ASCII.GetString(msg);
-                if (message.Equals("clear")) return;
-                DiscordService.SendDiscordWebHook(message);
+                if (!msg.IsNullOrEmpty())
+                {
+                    var message = Encoding.ASCII.GetString(msg);
+                    if (message.Equals("clear")) return;
+                    DiscordService.SendDiscordWebHook(message);
+                }
             }
             catch (Exception error)
             {
